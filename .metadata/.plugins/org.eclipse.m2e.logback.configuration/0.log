@@ -1,0 +1,27 @@
+2021-03-18 14:36:51,169 [Worker-3: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2021-03-18 14:39:05,544 [Worker-6: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.revature:P1_FrontDesk:0.0.1-SNAPSHOT @ C:\Users\rudel\Documents\workspace-spring-tool-suite-4-4.9.0.RELEASE\P1_FrontDesk\pom.xml.
+2021-03-18 14:39:06,854 [Worker-6: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /P1_FrontDesk/src/main/java
+2021-03-18 14:39:06,856 [Worker-6: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /P1_FrontDesk/src/main/resources
+2021-03-18 14:39:07,043 [Worker-6: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /P1_FrontDesk/src/test/java
+2021-03-18 14:39:07,044 [Worker-6: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /P1_FrontDesk/src/test/resources
+2021-03-18 14:39:09,026 [Worker-6: Importing Maven projects] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 1 project(s) in 13 sec
+2021-03-18 14:39:12,640 [Worker-9: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-03-18 14:39:12,961 [Worker-9: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-03-18 14:39:12,980 [Worker-9: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-03-18 14:39:13,023 [Worker-9: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-03-18 14:42:37,178 [Worker-12: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.revature:P1_FrontDesk:0.0.1-SNAPSHOT @ C:\Users\rudel\Documents\Project_1\P1_FrontDesk\pom.xml.
+2021-03-18 14:42:37,568 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /P1_FrontDesk/src/main/java
+2021-03-18 14:42:37,569 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /P1_FrontDesk/src/main/resources
+2021-03-18 14:42:37,570 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /P1_FrontDesk/src/test/java
+2021-03-18 14:42:37,570 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /P1_FrontDesk/src/test/resources
+2021-03-18 14:42:37,739 [Worker-12: Importing Maven projects] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 1 project(s) in 1 sec
+2021-03-18 14:42:38,611 [Worker-10: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-03-18 14:42:38,617 [Worker-10: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-03-18 14:42:38,625 [Worker-10: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-03-18 14:42:38,628 [Worker-10: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-03-18 14:43:46,701 [Worker-11: Creating project "P1_Manager"] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.revature:P1_Manager:0.0.1-SNAPSHOT @ C:\Users\rudel\Documents\Project_1\P1_Manager\pom.xml.
+2021-03-18 14:43:46,809 [Worker-11: Creating project "P1_Manager"] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /P1_Manager/src/main/java
+2021-03-18 14:43:46,810 [Worker-11: Creating project "P1_Manager"] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /P1_Manager/src/main/resources
+2021-03-18 14:43:46,811 [Worker-11: Creating project "P1_Manager"] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /P1_Manager/src/test/java
+2021-03-18 14:43:46,812 [Worker-11: Creating project "P1_Manager"] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /P1_Manager/src/test/resources
+2021-03-18 14:43:47,268 [Worker-12: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
