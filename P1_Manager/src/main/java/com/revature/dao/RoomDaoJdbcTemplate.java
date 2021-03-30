@@ -3,17 +3,30 @@ package com.revature.dao;
 import java.sql.PreparedStatement;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.revature.dao.mapper.RoomRowMapper;
 import com.revature.pojo.Room;
 
+@Repository
 public class RoomDaoJdbcTemplate implements RoomDao {
 
 	private JdbcTemplate jdbcTemplate;
 	
 	private RoomRowMapper roomRowMapper;
 	
+	@Autowired
+	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
+
+	@Autowired
+	public void setRoomRowMapper(RoomRowMapper roomRowMapper) {
+		this.roomRowMapper = roomRowMapper;
+	}
+
 	@Override
 	public void addRoom(Room room) {
 		

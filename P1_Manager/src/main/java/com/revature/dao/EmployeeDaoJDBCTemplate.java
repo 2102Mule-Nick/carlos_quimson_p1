@@ -48,9 +48,9 @@ public class EmployeeDaoJDBCTemplate implements EmployeeDao {
 		
 		String sql = "SELECT * FROM employees WHERE employee_id = ?";
 		
-		List<Employee> employeeList = jdbcTemplate.query(sql, employeeRowMapper, employeeId);
+		// List<Employee> employeeList = jdbcTemplate.query(sql, employeeRowMapper, employeeId); does not work with JUnit?
 		
-		return employeeList.get(0);
+		return jdbcTemplate.queryForObject(sql, employeeRowMapper, employeeId);
 		
 	}
 

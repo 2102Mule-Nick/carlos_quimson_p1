@@ -34,9 +34,9 @@ public class AppConfig {
 			":5432/" + System.getenv("DB_NAME") + "?";
 	
 	public static final String DATASOURCE_DRIVERNAME = "org.postgresql.Driver";
-	public static final String DATASOURCE_USERNAME = System.getenv("POS_DB_USERNAME");
-	public static final String DATASOURCE_PASSWORD = System.getenv("POS_DB_PASSWORD");
-	public static final String DATASOURCE_SCHEMA = "public"; //change this to system environment
+	public static final String DATASOURCE_USERNAME = System.getenv("DB_USERNAME");
+	public static final String DATASOURCE_PASSWORD = System.getenv("DB_PASS");
+	public static final String DATASOURCE_SCHEMA = System.getenv("DB_SCHEMA"); //change this to system environment
 	
 	
 	@Bean

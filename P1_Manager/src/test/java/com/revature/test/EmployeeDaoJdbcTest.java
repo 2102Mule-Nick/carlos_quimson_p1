@@ -49,7 +49,7 @@ public class EmployeeDaoJdbcTest {
 		
 		Employee employeeReturn = employeeDao.getEmployeeByEmployeeId(employeeId);
 		
-		verify(jdbcTemplate.queryForObject(sql, employeeRowMapper, employeeId));
+		verify(jdbcTemplate).queryForObject(sql, employeeRowMapper, employeeId);
 		
 		assertEquals(employee, employeeReturn);
 	}
