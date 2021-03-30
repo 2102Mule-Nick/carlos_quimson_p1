@@ -1,10 +1,13 @@
 package com.revature.service;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.revature.dao.EmployeeDao;
 import com.revature.pojo.Employee;
 
+@Component
 public class AuthServiceImpl implements AuthService {
 
 	private Logger log = Logger.getRootLogger();
@@ -39,5 +42,19 @@ public class AuthServiceImpl implements AuthService {
 		}
 		throw new IllegalArgumentException();
 	}
+
+	@Autowired
+	public void setEmployeeDao(EmployeeDao employeeDao) {
+		this.employeeDao = employeeDao;
+	}
+
+	public AuthServiceImpl() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	
+	
 
 }
