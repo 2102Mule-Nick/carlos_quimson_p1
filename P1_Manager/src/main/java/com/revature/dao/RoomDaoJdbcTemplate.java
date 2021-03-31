@@ -69,7 +69,7 @@ public class RoomDaoJdbcTemplate implements RoomDao {
 
 	}
 
-	@Override
+	@Override //copy this to front desk and housekeeping application
 	public void updateRoomStatus(Room room) {
 		String sql = "UPDATE rooms SET room_status = ? WHERE room_number = ?";
 		
@@ -82,7 +82,7 @@ public class RoomDaoJdbcTemplate implements RoomDao {
 
 	}
 
-	@Override
+	@Override // copy this to front desk application
 	public void updateRoomOccupied(Room room) {
 		String sql = "UPDATE rooms SET room_occupied = ? WHERE room_number = ?";
 		
@@ -102,6 +102,18 @@ public class RoomDaoJdbcTemplate implements RoomDao {
 		List<Room> allRooms = jdbcTemplate.query(sql, roomRowMapper);
 		
 		return allRooms;
+	}
+
+	@Override // copy this to maintenance application
+	public void updateRoomOutOfService(Room room) {
+		String sql = "UPDATE rooms SET room_out_of_service = ? WHERE room_number = ?";
+		
+		jdbcTemplate.update( connection -> {
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setBoolean(1, room.isRoomOutOfService());
+			ps.setInt(2, room.getRoomNumber());
+			return ps;
+		});
 	}
 
 }

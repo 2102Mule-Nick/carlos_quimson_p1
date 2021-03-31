@@ -9,6 +9,16 @@ public class Room {
 	private String roomStatus;
 	
 	private boolean roomOccupied;
+	
+	private boolean roomOutOfService;
+	
+	public boolean isRoomOutOfService() {
+		return roomOutOfService;
+	}
+
+	public void setRoomOutOfService(boolean roomOutOfService) {
+		this.roomOutOfService = roomOutOfService;
+	}
 
 	public int getRoomNumber() {
 		return roomNumber;

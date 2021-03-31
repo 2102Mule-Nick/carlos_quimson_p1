@@ -16,6 +16,8 @@ public interface RoomDao {
 	
 	public void updateRoomOccupied(Room room);
 	
+	public void updateRoomOutOfService(Room room);
+	
 	public List<Room> getAllRooms();
 
 }
