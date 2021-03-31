@@ -11,11 +11,11 @@ public class JmsMessageSender {
 
 	private JmsTemplate jmsTemplate;
 	
-	private Queue managerQueue;
+	private Queue housekeepingQueue;
 
 	@Autowired
-	public void setManagerQueue(Queue managerQueue) {
-		this.managerQueue = managerQueue;
+	public void setManagerQueue(Queue housekeepingQueue) {
+		this.housekeepingQueue = housekeepingQueue;
 	}
 
 	@Autowired
@@ -23,8 +23,8 @@ public class JmsMessageSender {
 		this.jmsTemplate = jmsTemplate;
 	}
 	
-	public void managerSend(String msg) {
-		jmsTemplate.send(managerQueue, (s) -> s.createTextMessage(msg));
+	public void housekeepingSend(String msg) {
+		jmsTemplate.send(housekeepingQueue, (s) -> s.createTextMessage(msg));
 	}
 	
 	

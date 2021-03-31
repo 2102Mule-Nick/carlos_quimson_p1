@@ -27,7 +27,7 @@ public class AppConfig {
 	public static final String BROKER_URL = "tcp://localhost:61616";
 	
 	//JMS Destinations
-	public static final String MANAGER_QUEUE = "MANAGER_QUEUE";
+	public static final String ROOM_STATUS_QUEUE = "ROOM_STATUS_QUEUE";
 	
 	//DataSource info
 	public static final String DATASOURCE_URL = "jdbc:postgresql://" + System.getenv("DB_URL") +
@@ -77,14 +77,14 @@ public class AppConfig {
 	
 	@Bean
 	public Queue destinationQueue() {
-		return new ActiveMQQueue(MANAGER_QUEUE);
+		return new ActiveMQQueue(ROOM_STATUS_QUEUE);
 	}
 	
-	@Bean
+	@Bean //probably remove because this will only send and not receive
 	public DefaultMessageListenerContainer jmsContainer(ConnectionFactory connectionFactory, JmsMessageListener messageListener) {
 		DefaultMessageListenerContainer container = new DefaultMessageListenerContainer();
 		container.setConnectionFactory(connectionFactory);
-		container.setDestinationName(MANAGER_QUEUE);
+		container.setDestinationName(ROOM_STATUS_QUEUE);
 		container.setMessageListener(messageListener);
 		
 		return container;

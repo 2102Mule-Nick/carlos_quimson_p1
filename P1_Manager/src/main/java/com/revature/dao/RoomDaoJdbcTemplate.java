@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.revature.dao.mapper.RoomRowMapper;
+import com.revature.messaging.JmsMessageSender;
 import com.revature.pojo.Room;
 
 @Repository
@@ -17,6 +18,13 @@ public class RoomDaoJdbcTemplate implements RoomDao {
 	
 	private RoomRowMapper roomRowMapper;
 	
+	private JmsMessageSender messageSender;
+	
+	@Autowired
+	public void setMessageSender(JmsMessageSender messageSender) {
+		this.messageSender = messageSender;
+	}
+
 	@Autowired
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
@@ -71,6 +79,10 @@ public class RoomDaoJdbcTemplate implements RoomDao {
 
 	@Override //copy this to front desk and housekeeping application
 	public void updateRoomStatus(Room room) {
+		messageSender.housekeepingSend(room);
+		
+		/**************************************************************
+		 * code that is in the Housekeeping Application. just use a JMS sender
 		String sql = "UPDATE rooms SET room_status = ? WHERE room_number = ?";
 		
 		jdbcTemplate.update( connection -> {
@@ -79,6 +91,7 @@ public class RoomDaoJdbcTemplate implements RoomDao {
 			ps.setInt(2, room.getRoomNumber());
 			return ps;
 		});
+		*/
 
 	}
 
