@@ -15,9 +15,11 @@ public interface RoomDao {
 	
 	public void updateRoomOutOfService(Room room); -> use SOAP to get this from the maintenance
 	
+	public void updateRoom(Room room);
+	
 	*/
 	
-	public void updateRoom(Room room);
+
 	
 	public void updateRoomStatus(Room room);
 	

@@ -13,6 +13,8 @@ import org.springframework.context.annotation.Configuration;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.jms.annotation.EnableJms;
+import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.connection.SingleConnectionFactory;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.listener.DefaultMessageListenerContainer;
@@ -21,6 +23,7 @@ import com.revature.messaging.JmsMessageListener;
 
 @Configuration
 @ComponentScan("com.revature")
+@EnableJms
 public class AppConfig {
 
 	//JMS Broker URL
@@ -81,11 +84,18 @@ public class AppConfig {
 	}
 	
 	@Bean
+	public DefaultJmsListenerContainerFactory jmsListenerContainerFactory(ConnectionFactory connectionFactory) {
+		DefaultJmsListenerContainerFactory container = new DefaultJmsListenerContainerFactory();
+		container.setConnectionFactory(connectionFactory);
+		return container;
+	}
+	
+	@Bean
 	public DefaultMessageListenerContainer jmsContainer(ConnectionFactory connectionFactory, JmsMessageListener messageListener) {
 		DefaultMessageListenerContainer container = new DefaultMessageListenerContainer();
 		container.setConnectionFactory(connectionFactory);
-		// container.setDestinationName(ROOM_STATUS_QUEUE); set in the JmsMessageListener via annotation
-		// container.setMessageListener(messageListener);
+		container.setDestinationName(ROOM_STATUS_QUEUE); //set in the JmsMessageListener via annotation
+		container.setMessageListener(messageListener);
 		
 		return container;
 	}

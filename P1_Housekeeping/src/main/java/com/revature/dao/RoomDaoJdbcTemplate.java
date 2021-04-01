@@ -27,19 +27,6 @@ public class RoomDaoJdbcTemplate implements RoomDao {
 		this.roomRowMapper = roomRowMapper;
 	}
 
-	@Override
-	public void updateRoom(Room room) {
-		String sql = "UPDATE rooms SET room_type = ? WHERE room_number = ?";
-		
-		jdbcTemplate.update( connection -> {
-			PreparedStatement ps = connection.prepareStatement(sql);
-			ps.setString(1, room.getRoomType());
-			ps.setInt(2, room.getRoomNumber());
-			return ps;
-		});
-
-	}
-
 	@Override //copy this to front desk and housekeeping application
 	public void updateRoomStatus(Room room) {
 		String sql = "UPDATE rooms SET room_status = ? WHERE room_number = ?";
@@ -65,6 +52,22 @@ public class RoomDaoJdbcTemplate implements RoomDao {
 	
 	/***********************************************************************************************
 	 * only manager can access this methods
+	 * 
+	
+		@Override
+	public void updateRoom(Room room) {
+		String sql = "UPDATE rooms SET room_type = ? WHERE room_number = ?";
+		
+		jdbcTemplate.update( connection -> {
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setString(1, room.getRoomType());
+			ps.setInt(2, room.getRoomNumber());
+			return ps;
+		});
+
+	}
+	
+	
 	@Override
 	public void addRoom(Room room) {
 		

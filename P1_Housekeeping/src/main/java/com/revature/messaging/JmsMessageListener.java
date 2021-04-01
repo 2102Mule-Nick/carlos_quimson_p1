@@ -15,7 +15,7 @@ import com.revature.dao.RoomDao;
 import com.revature.pojo.Room;
 
 @Component
-public class JmsMessageListener{
+public class JmsMessageListener implements MessageListener{
 
 	RoomDao roomDao;
 	
@@ -33,12 +33,23 @@ public class JmsMessageListener{
 			
 			try {
 				Room room = (Room)om.getObject();
-				roomDao.updateRoom(room);
+				roomDao.updateRoomStatus(room);
 				
 				
 			} catch (JMSException e) {
 				e.printStackTrace();
 			}
+		}
+		else if (message instanceof TextMessage) {
+			
+			try {
+				String msg = ((TextMessage) message).getText();
+				System.out.println("===Housekeeping=============MESSAGE RECIEVED: " + msg + "===================");
+			} catch (JMSException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 	}
 

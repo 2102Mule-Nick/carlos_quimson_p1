@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.connection.SingleConnectionFactory;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.listener.DefaultMessageListenerContainer;
@@ -21,6 +22,7 @@ import com.revature.messaging.JmsMessageListener;
 
 @Configuration
 @ComponentScan("com.revature")
+@EnableJms
 public class AppConfig {
 
 	//JMS Broker URL
@@ -80,15 +82,17 @@ public class AppConfig {
 		return new ActiveMQQueue(ROOM_STATUS_QUEUE);
 	}
 	
+	/* removed because this will only be a sender not a listener
 	@Bean //probably remove because this will only send and not receive
 	public DefaultMessageListenerContainer jmsContainer(ConnectionFactory connectionFactory, JmsMessageListener messageListener) {
 		DefaultMessageListenerContainer container = new DefaultMessageListenerContainer();
 		container.setConnectionFactory(connectionFactory);
 		container.setDestinationName(ROOM_STATUS_QUEUE);
-		container.setMessageListener(messageListener);
+		//container.setMessageListener(messageListener);
 		
 		return container;
 	}
+	*/
 	
 	@Bean
 	public JmsTemplate jmsTemplate(ConnectionFactory connectionFactory) {
