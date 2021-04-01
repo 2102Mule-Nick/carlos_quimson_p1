@@ -38,8 +38,8 @@ public class RoomDaoJdbcTemplate implements RoomDao {
 	@Override
 	public void addRoom(Room room) {
 		
-		String sql = "INSERT INTO rooms (room_number, room_type, room_status, room_occupied)"
-				+ "VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO rooms (room_number, room_type, room_status, room_occupied, room_out_of_service)"
+				+ "VALUES (?, ?, ?, ?, ?)";
 		
 		jdbcTemplate.update(connection -> {
 			PreparedStatement ps = connection.prepareStatement(sql);
@@ -47,6 +47,7 @@ public class RoomDaoJdbcTemplate implements RoomDao {
 			ps.setString(2, room.getRoomType());
 			ps.setString(3, room.getRoomStatus());
 			ps.setBoolean(4, room.isRoomOccupied());
+			ps.setBoolean(5, room.isRoomOutOfService());
 			return ps;
 		});
 

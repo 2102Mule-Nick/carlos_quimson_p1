@@ -7,7 +7,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.revature.config.AppConfig;
+import com.revature.dao.RoomDaoJdbcTemplate;
 import com.revature.messaging.JmsMessageSender;
+import com.revature.pojo.Room;
 
 public class TestDriver {
 
@@ -28,6 +30,17 @@ public static void main(String[] args) {
 		System.out.println("Message sent to Housekeeping");
 		*/
 		
+		RoomDaoJdbcTemplate roomDao = appContext.getBean(RoomDaoJdbcTemplate.class);
+		
+		Room room = new Room();
+		
+		room.setRoomNumber(101);
+		room.setRoomStatus("Dirty");
+		room.setRoomType("NKK");
+		room.setRoomOccupied(false);
+		room.setRoomOutOfService(false);
+		
+		roomDao.addRoom(room);
 		
 	}
 }
