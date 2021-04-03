@@ -12,15 +12,16 @@ import org.springframework.stereotype.Component;
 
 import com.revature.config.AppConfig;
 import com.revature.dao.RoomDao;
+import com.revature.dao.RoomDaoJdbcTemplate;
 import com.revature.pojo.Room;
 
 @Component
 public class JmsMessageListener implements MessageListener{
 
-	RoomDao roomDao;
+	RoomDaoJdbcTemplate roomDao;
 	
 	@Autowired
-	public void setRoomDao(RoomDao roomDao) {
+	public void setRoomDao(RoomDaoJdbcTemplate roomDao) {
 		this.roomDao = roomDao;
 	}
 
@@ -34,6 +35,7 @@ public class JmsMessageListener implements MessageListener{
 			try {
 				Room room = (Room)om.getObject();
 				roomDao.updateRoomStatus(room);
+				System.out.println("Message Received: Updating room");
 				
 				
 			} catch (JMSException e) {

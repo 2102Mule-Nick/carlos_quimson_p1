@@ -6,7 +6,7 @@ import com.revature.pojo.Employee;
 
 public interface EmployeeDao {
 
-	public void addEmployee(Employee employee);
+	public Employee addEmployee(Employee employee);
 	
 	public Employee getEmployeeByEmployeeId(int employeeId);
 	

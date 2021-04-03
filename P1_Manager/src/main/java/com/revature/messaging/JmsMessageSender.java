@@ -28,7 +28,7 @@ public class JmsMessageSender {
 	}
 	
 	public void housekeepingSend(Room room) {
-		jmsTemplate.send(housekeepingQueue, (s) -> s.createObjectMessage((Serializable) room));
+		jmsTemplate.send(housekeepingQueue, (s) -> s.createObjectMessage(room));
 	}
 	
 	// for testing only

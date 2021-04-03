@@ -26,15 +26,30 @@ public class RoomDaoJdbcTemplate implements RoomDao {
 	public void setRoomRowMapper(RoomRowMapper roomRowMapper) {
 		this.roomRowMapper = roomRowMapper;
 	}
+	
+	@Override
+	public Room getRoomByRoomNumber(int roomNumber) {
+		Room returnRoom;
+		
+		String sql = "SELECT * FROM rooms WHERE room_number = ?";
+		
+		List<Room> roomList = jdbcTemplate.query(sql, roomRowMapper, roomNumber);
+		
+		returnRoom = roomList.get(0);
+		
+		return returnRoom;
+	}
 
 	@Override //copy this to front desk and housekeeping application
 	public void updateRoomStatus(Room room) {
 		String sql = "UPDATE rooms SET room_status = ? WHERE room_number = ?";
 		
+		Room updateRoom = this.getRoomByRoomNumber(room.getRoomNumber());
+		
 		jdbcTemplate.update( connection -> {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, room.getRoomStatus());
-			ps.setInt(2, room.getRoomNumber());
+			ps.setInt(2, updateRoom.getRoomNumber());
 			return ps;
 		});
 

@@ -19,7 +19,7 @@ public interface RoomDao {
 	
 	*/
 	
-
+	public Room getRoomByRoomNumber(int roomNumber);
 	
 	public void updateRoomStatus(Room room);
 	

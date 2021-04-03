@@ -122,12 +122,25 @@ public class RoomDaoJdbcTemplate implements RoomDao {
 	public void updateRoomOutOfService(Room room) {
 		String sql = "UPDATE rooms SET room_out_of_service = ? WHERE room_number = ?";
 		
+		Room updateRoom = this.getRoomByRoomNumber(room.getRoomNumber());
+		
 		jdbcTemplate.update( connection -> {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setBoolean(1, room.isRoomOutOfService());
-			ps.setInt(2, room.getRoomNumber());
+			ps.setInt(2, updateRoom.getRoomNumber());
 			return ps;
 		});
+	}
+
+	@Override
+	public Room getRoomByRoomNumber(int roomNumber) {
+		Room returnRoom;
+		
+		String sql = "SELECT * FROM rooms WHERE room_number = ?";
+		
+		returnRoom = (Room) jdbcTemplate.query(sql, roomRowMapper, roomNumber);
+		
+		return returnRoom;
 	}
 
 }

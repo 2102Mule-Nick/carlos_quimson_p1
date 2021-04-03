@@ -21,10 +21,10 @@ public class EmployeeDaoJDBCTemplate implements EmployeeDao {
 	private EmployeeRowMapper employeeRowMapper;
 
 	@Override
-	public void addEmployee(Employee employee) { //maybe return employee to show the employee_id for the newly added employee
+	public Employee addEmployee(Employee employee) { //maybe return employee to show the employee_id for the newly added employee
 		
-		String sql = "INSERT INTO employees (first_name, last_name, pass_word, department)"
-				+ "VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO employees (first_name, last_name, pass_word, department, active)"
+				+ "VALUES (?, ?, ?, ?, true)";
 		
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		
@@ -39,7 +39,7 @@ public class EmployeeDaoJDBCTemplate implements EmployeeDao {
 		
 		employee.setEmployeeId((int) keyHolder.getKeys().get("employee_id"));
 		
-		//return employee; uncomment later when ready
+		return employee; //uncomment later when ready
 
 	}
 

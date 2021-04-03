@@ -1,6 +1,8 @@
 package com.revature.pojo;
 
-public class Room {
+import java.io.Serializable;
+
+public class Room implements Serializable {
 	
 	private int roomNumber;
 	
@@ -55,6 +57,15 @@ public class Room {
 	public Room() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public Room(int roomNumber, String roomType, String roomStatus, boolean roomOccupied, boolean roomOutOfService) {
+		super();
+		this.roomNumber = roomNumber;
+		this.roomType = roomType;
+		this.roomStatus = roomStatus;
+		this.roomOccupied = roomOccupied;
+		this.roomOutOfService = roomOutOfService;
 	}
 	
 	

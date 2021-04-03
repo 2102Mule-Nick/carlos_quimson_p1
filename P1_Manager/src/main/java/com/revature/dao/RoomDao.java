@@ -6,6 +6,8 @@ import com.revature.pojo.Room;
 
 public interface RoomDao {
 	
+	public Room getRoomByRoomNumber(int roomNumber);
+	
 	public void addRoom(Room room);
 	
 	public void removeRoom(Room room);

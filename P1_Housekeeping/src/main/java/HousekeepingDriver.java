@@ -4,6 +4,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.revature.config.AppConfig;
+import com.revature.dao.RoomDaoJdbcTemplate;
+import com.revature.pojo.Room;
 
 public class HousekeepingDriver {
 
@@ -16,6 +18,7 @@ public class HousekeepingDriver {
 		Scanner scan = new Scanner(System.in);
 		
 		ApplicationContext appContext = new AnnotationConfigApplicationContext(AppConfig.class);
+		
 		
 		while(!"exit".equals(command)) {
 			//just listening for messages
