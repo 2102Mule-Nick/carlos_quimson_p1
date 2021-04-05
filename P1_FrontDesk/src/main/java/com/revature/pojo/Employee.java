@@ -1,5 +1,6 @@
 package com.revature.pojo;
 
+
 public class Employee {
 
 	private int employeeId;
@@ -11,6 +12,8 @@ public class Employee {
 	private String lastName;
 	
 	private String department;
+	
+	private Boolean active;
 
 	public int getEmployeeId() {
 		return employeeId;
@@ -50,6 +53,14 @@ public class Employee {
 
 	public void setDepartment(String department) {
 		this.department = department;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 
 	public Employee() {
