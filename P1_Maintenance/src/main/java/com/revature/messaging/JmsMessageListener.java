@@ -3,26 +3,44 @@ package com.revature.messaging;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
+import javax.jms.ObjectMessage;
 import javax.jms.TextMessage;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
+
+import com.revature.config.AppConfig;
+import com.revature.dao.RoomDao;
+import com.revature.pojo.Room;
 
 @Component
 public class JmsMessageListener implements MessageListener {
 
-	@Override
+	private RoomDao roomDao;
+		
+	@Autowired
+	public void setRoomDao(RoomDao roomDao) {
+		this.roomDao = roomDao;
+	}
+
+	@JmsListener(destination = AppConfig.ROOM_OCCUPIED_QUEUE)
 	public void onMessage(Message message) {
 		// TODO Auto-generated method stub
 		
-			if (message instanceof TextMessage) {
-				
-				try {
-					String msg = ((TextMessage) message).getText();
-					System.out.println("----------------------MESSAGE RECEIVED----------------------");
-				} catch (JMSException e) {
-					e.printStackTrace();
-				}
+		if (message instanceof ObjectMessage) {
+
+			ObjectMessage om = (ObjectMessage) message;
+
+			try {
+				Room room = (Room) om.getObject();
+				roomDao.updateRoomOutOfService(room);
+				System.out.println("Message Received: Updating room");
+
+			} catch (JMSException e) {
+				e.printStackTrace();
 			}
+		}
 	}
 
 }

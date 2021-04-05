@@ -25,6 +25,7 @@ public static void main(String[] args) {
 		
 		JmsMessageSender messageSender = appContext.getBean("jmsMessageSender", JmsMessageSender.class);
 		
+		RoomDaoJdbcTemplate roomDao = appContext.getBean(RoomDaoJdbcTemplate.class);
 		
 		/**********
 		 * Testing JMS
@@ -33,9 +34,6 @@ public static void main(String[] args) {
 		
 		System.out.println("Message sent to Housekeeping");
 		*/
-		
-		
-		
 		
 		
 		/******************
@@ -54,15 +52,28 @@ public static void main(String[] args) {
 		roomDao.addRoom(room);
 		*/
 		
-		// Testing setting a roomStatus via JMS
+		
+		/***********************************************
+		 * Testing using SOAP via the updateOos
+		 */
+		System.out.println("Attempting to Update OOS");
 		Room room = new Room();
-		
 		room.setRoomNumber(101);
-		room.setRoomStatus("Clean");
+		room.setRoomOutOfService(false);
+		
+		roomDao.updateRoomOutOfService(room);
+		System.out.println("Room out of Service updated");
 		
 		
-		System.out.println("Attempting to update Room Status in Housekeeping Application via JMS");
-		messageSender.housekeepingSend(room);
+		// Testing setting a roomStatus via JMS
+//		Room room = new Room();
+//		
+//		room.setRoomNumber(101);
+//		room.setRoomStatus("Clean");
+//		
+//		
+//		System.out.println("Attempting to update Room Status in Housekeeping Application via JMS");
+//		messageSender.housekeepingSend(room);
 		
 		// testing adding an employee
 		

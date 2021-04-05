@@ -8,7 +8,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.revature.dao.mapper.RoomRowMapper;
-import com.revature.messaging.JmsMessageSender;
 import com.revature.pojo.Room;
 
 @Repository
@@ -18,13 +17,6 @@ public class RoomDaoJdbcTemplate implements RoomDao { //Maintenance application
 	
 	private RoomRowMapper roomRowMapper;
 	
-	private JmsMessageSender messageSender;
-	
-	@Autowired
-	public void setMessageSender(JmsMessageSender messageSender) {
-		this.messageSender = messageSender;
-	}
-
 	@Autowired
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
@@ -64,7 +56,9 @@ public class RoomDaoJdbcTemplate implements RoomDao { //Maintenance application
 		
 		String sql = "SELECT * FROM rooms WHERE room_number = ?";
 		
-		returnRoom = (Room) jdbcTemplate.query(sql, roomRowMapper, roomNumber);
+		List<Room> roomList = jdbcTemplate.query(sql, roomRowMapper, roomNumber);
+		
+		returnRoom = roomList.get(0);
 		
 		return returnRoom;
 	}

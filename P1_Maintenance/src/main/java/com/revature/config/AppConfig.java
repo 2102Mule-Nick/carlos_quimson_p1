@@ -1,5 +1,6 @@
 package com.revature.config;
 
+
 import javax.jms.ConnectionFactory;
 import javax.jms.Queue;
 import javax.sql.DataSource;
@@ -13,23 +14,18 @@ import org.springframework.context.annotation.Configuration;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.jms.annotation.EnableJms;
+import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.connection.SingleConnectionFactory;
-import org.springframework.jms.core.JmsTemplate;
-import org.springframework.jms.listener.DefaultMessageListenerContainer;
-
-import com.revature.messaging.JmsMessageListener;
 
 @Configuration
 @ComponentScan("com.revature")
-@EnableJms
 public class AppConfig {
-
-	//JMS Broker URL
-	public static final String BROKER_URL = "tcp://localhost:61616";
 	
-	//JMS Destinations
-	public static final String ROOM_STATUS_QUEUE = "ROOM_STATUS_QUEUE";
+	// JMS Broker URL
+	public static final String BROKER_URL = "tcp://localhost:61616";
+
+	// JMS Destinations
+	public static final String ROOM_OCCUPIED_QUEUE = "ROOM_OCCUPIED_QUEUE";
 	
 	//DataSource info
 	public static final String DATASOURCE_URL = "jdbc:postgresql://" + System.getenv("DB_URL") +
@@ -69,6 +65,7 @@ public class AppConfig {
 	@Bean
 	public ActiveMQConnectionFactory amqConnectionFactory() {
 		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(BROKER_URL);
+		connectionFactory.setTrustAllPackages(true);
 		return connectionFactory;
 	}
 	
@@ -79,26 +76,13 @@ public class AppConfig {
 	
 	@Bean
 	public Queue destinationQueue() {
-		return new ActiveMQQueue(ROOM_STATUS_QUEUE);
+		return new ActiveMQQueue(ROOM_OCCUPIED_QUEUE);
 	}
-	
-	/* removed because this will only be a sender not a listener
-	@Bean //probably remove because this will only send and not receive
-	public DefaultMessageListenerContainer jmsContainer(ConnectionFactory connectionFactory, JmsMessageListener messageListener) {
-		DefaultMessageListenerContainer container = new DefaultMessageListenerContainer();
-		container.setConnectionFactory(connectionFactory);
-		container.setDestinationName(ROOM_STATUS_QUEUE);
-		//container.setMessageListener(messageListener);
-		
-		return container;
-	}
-	*/
-	
+
 	@Bean
-	public JmsTemplate jmsTemplate(ConnectionFactory connectionFactory) {
-		JmsTemplate template = new JmsTemplate();
-		template.setConnectionFactory(connectionFactory);
-		
-		return template;
+	public DefaultJmsListenerContainerFactory jmsListenerContainerFactory(ConnectionFactory connectionFactory) {
+		DefaultJmsListenerContainerFactory container = new DefaultJmsListenerContainerFactory();
+		container.setConnectionFactory(connectionFactory);
+		return container;
 	}
 }
