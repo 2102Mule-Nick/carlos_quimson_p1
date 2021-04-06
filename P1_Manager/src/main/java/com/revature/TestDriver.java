@@ -31,6 +31,23 @@ public static void main(String[] args) {
 		
 		TicketDaoJDBCTemplate ticketDao = appContext.getBean(TicketDaoJDBCTemplate.class);
 		
+		//Creating a ticket using JMS
+		System.out.println("Attempting to add ticket");
+		Ticket newTicket = new Ticket();
+		newTicket.setDepartment("Housekeeping");
+		newTicket.setRoomNumber(101);
+		newTicket.setRequest("Plunger");
+		
+		Ticket rTicket = new Ticket();
+		
+		rTicket = ticketDao.createTicket(newTicket);
+		
+		newTicket.setTicketNumber(rTicket.getTicketNumber());
+		
+		messageSender.housekeepingTicketSend(newTicket);
+		
+		System.out.println("New Ticket sent");
+		
 		/*
 		 * Attempting to create a ticket
 		 * 
@@ -54,13 +71,13 @@ public static void main(String[] args) {
 		 * 
 		 */
 		
-		Ticket resolveTicket = new Ticket();
-		resolveTicket.setRequest("Towels given");
-		resolveTicket.setTicketNumber(1);
-		resolveTicket.setResolved(true);
-		
-		ticketDao.updateTicket(resolveTicket);
-		System.out.println("Ticket updated: " + resolveTicket.getTicketNumber() + " Request: " + resolveTicket.getRequest());
+//		Ticket resolveTicket = new Ticket();
+//		resolveTicket.setRequest("Towels given");
+//		resolveTicket.setTicketNumber(1);
+//		resolveTicket.setResolved(true);
+//		
+//		ticketDao.updateTicket(resolveTicket);
+//		System.out.println("Ticket updated: " + resolveTicket.getTicketNumber() + " Request: " + resolveTicket.getRequest());
 		
 		/**********
 		 * Testing JMS
@@ -71,21 +88,19 @@ public static void main(String[] args) {
 		*/
 		
 		
-		/******************
-		 * testing adding a room
-		 * 
-		RoomDaoJdbcTemplate roomDao = appContext.getBean(RoomDaoJdbcTemplate.class);
 		
-		Room room = new Room();
+		//testing adding a room
 		
-		room.setRoomNumber(101);
-		room.setRoomStatus("Dirty");
-		room.setRoomType("NKK");
-		room.setRoomOccupied(false);
-		room.setRoomOutOfService(false);
+//		Room room = new Room();
+//		
+//		room.setRoomNumber(201);
+//		room.setRoomStatus("Dirty");
+//		room.setRoomType("NKK");
+//		room.setRoomOccupied(false);
+//		room.setRoomOutOfService(false);
+//		
+//		roomDao.addRoom(room);
 		
-		roomDao.addRoom(room);
-		*/
 		
 		
 		/***********************************************
@@ -99,7 +114,8 @@ public static void main(String[] args) {
 //		roomDao.updateRoomOutOfService(room);
 //		System.out.println("Room out of Service updated");
 		
-		
+
+//**********************************************************************
 		// Testing setting a roomStatus via JMS
 //		Room room = new Room();
 //		

@@ -13,19 +13,28 @@ import org.springframework.stereotype.Component;
 import com.revature.config.AppConfig;
 import com.revature.dao.RoomDao;
 import com.revature.dao.RoomDaoJdbcTemplate;
+import com.revature.dao.TicketDaoJDBCTemplate;
 import com.revature.pojo.Room;
+import com.revature.pojo.Ticket;
 
 @Component
 public class JmsMessageListener implements MessageListener{
 
 	RoomDaoJdbcTemplate roomDao;
 	
+	TicketDaoJDBCTemplate ticketDao;
+	
+	@Autowired	
+	public void setTicketDao(TicketDaoJDBCTemplate ticketDao) {
+		this.ticketDao = ticketDao;
+	}
+
 	@Autowired
 	public void setRoomDao(RoomDaoJdbcTemplate roomDao) {
 		this.roomDao = roomDao;
 	}
 
-	@JmsListener(destination = AppConfig.ROOM_STATUS_QUEUE)
+	@JmsListener(destination = AppConfig.ROOM_STATUS_QUEUE, containerFactory = "jmsListenerContainerQueue")
 	public void onMessage(Message message) {
 		
 		if (message instanceof ObjectMessage) {
@@ -54,5 +63,24 @@ public class JmsMessageListener implements MessageListener{
 			
 		}
 	}
+	
+//	@JmsListener(destination = AppConfig.HOUSEKEEPING_TICKET_TOPIC)
+//	public void ticketMessage(Message message) {
+//		
+//		if (message instanceof ObjectMessage) {
+//			
+//			ObjectMessage om = (ObjectMessage)message;
+//			
+//			try {
+//				System.out.println("Housekeeping ticket topic: ");
+//				Ticket ticket = (Ticket)om.getObject();
+//				ticketDao.getTicketByNumber(ticket.getTicketNumber());
+//				System.out.println("New Ticket Received");
+//			} catch (JMSException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		
+//	}
 
 }
