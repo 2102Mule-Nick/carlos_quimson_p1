@@ -9,9 +9,11 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import com.revature.config.AppConfig;
 import com.revature.dao.EmployeeDaoJDBCTemplate;
 import com.revature.dao.RoomDaoJdbcTemplate;
+import com.revature.dao.TicketDaoJDBCTemplate;
 import com.revature.messaging.JmsMessageSender;
 import com.revature.pojo.Employee;
 import com.revature.pojo.Room;
+import com.revature.pojo.Ticket;
 
 public class TestDriver {
 
@@ -26,6 +28,39 @@ public static void main(String[] args) {
 		JmsMessageSender messageSender = appContext.getBean("jmsMessageSender", JmsMessageSender.class);
 		
 		RoomDaoJdbcTemplate roomDao = appContext.getBean(RoomDaoJdbcTemplate.class);
+		
+		TicketDaoJDBCTemplate ticketDao = appContext.getBean(TicketDaoJDBCTemplate.class);
+		
+		/*
+		 * Attempting to create a ticket
+		 * 
+		 */
+//		System.out.println("Attempting to add ticket");
+//		Ticket newTicket = new Ticket();
+//		newTicket.setDepartment("Housekeeping");
+//		newTicket.setRoomNumber(101);
+//		newTicket.setRequest("Requests new towels");
+//		
+//		Ticket rTicket = new Ticket();
+//		
+//		rTicket = ticketDao.createTicket(newTicket);
+//		
+//		newTicket.setTicketNumber(rTicket.getTicketNumber());
+//		
+//		System.out.println("New Ticket entered: " + newTicket.getTicketNumber() + " Request: " + newTicket.getRequest());
+		
+		/*
+		 * Attempting to resolve Ticket
+		 * 
+		 */
+		
+		Ticket resolveTicket = new Ticket();
+		resolveTicket.setRequest("Towels given");
+		resolveTicket.setTicketNumber(1);
+		resolveTicket.setResolved(true);
+		
+		ticketDao.updateTicket(resolveTicket);
+		System.out.println("Ticket updated: " + resolveTicket.getTicketNumber() + " Request: " + resolveTicket.getRequest());
 		
 		/**********
 		 * Testing JMS
@@ -56,13 +91,13 @@ public static void main(String[] args) {
 		/***********************************************
 		 * Testing using SOAP via the updateOos
 		 */
-		System.out.println("Attempting to Update OOS");
-		Room room = new Room();
-		room.setRoomNumber(101);
-		room.setRoomOutOfService(false);
-		
-		roomDao.updateRoomOutOfService(room);
-		System.out.println("Room out of Service updated");
+//		System.out.println("Attempting to Update OOS");
+//		Room room = new Room();
+//		room.setRoomNumber(101);
+//		room.setRoomOutOfService(false);
+//		
+//		roomDao.updateRoomOutOfService(room);
+//		System.out.println("Room out of Service updated");
 		
 		
 		// Testing setting a roomStatus via JMS

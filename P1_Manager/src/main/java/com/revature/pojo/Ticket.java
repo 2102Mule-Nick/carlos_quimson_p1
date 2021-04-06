@@ -56,6 +56,15 @@ public class Ticket {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	public Ticket(int ticketNumber, int roomNumber, String department, String request, boolean resolved) {
+		super();
+		this.ticketNumber = ticketNumber;
+		this.roomNumber = roomNumber;
+		this.department = department;
+		this.request = request;
+		this.resolved = resolved;
+	}
 	
 	
 	

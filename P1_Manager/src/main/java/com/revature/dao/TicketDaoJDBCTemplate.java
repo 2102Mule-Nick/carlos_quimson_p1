@@ -31,7 +31,7 @@ public class TicketDaoJDBCTemplate implements TicketDao {
 	}
 
 	@Override
-	public void createTicket(Ticket ticket) {
+	public Ticket createTicket(Ticket ticket) {
 
 		String sql = "INSERT INTO tickets (room_number, department, request, resolved)"
 				+ "VALUES (?, ?, ?, false)";
@@ -47,16 +47,21 @@ public class TicketDaoJDBCTemplate implements TicketDao {
 		}, keyHolder);
 		
 		ticket.setTicketNumber((int) keyHolder.getKeys().get("ticket_number"));
+		
+		return ticket;
 	}
 
 	@Override
 	public void updateTicket(Ticket ticket) {
 
+		
+		Ticket updateTicket = this.getTicketByNumber(ticket.getTicketNumber());
+		
 		String sql = "UPDATE tickets SET request = ?, resolved = ? WHERE ticket_number = ?";
 		
 		jdbcTemplate.update(connection -> {
 			PreparedStatement ps = connection.prepareStatement(sql);
-			ps.setString(1, ticket.getRequest());
+			ps.setString(1, ticket.getRequest() + "\n" +  updateTicket.getRequest());
 			ps.setBoolean(2, ticket.isResolved());
 			ps.setInt(3, ticket.getTicketNumber());
 			return ps;
@@ -76,8 +81,13 @@ public class TicketDaoJDBCTemplate implements TicketDao {
 
 	@Override
 	public Ticket getTicketByNumber(int ticketNumber) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		String sql = "SELECT * FROM tickets WHERE ticket_number = ?";
+		
+		Ticket returnTicket = jdbcTemplate.queryForObject(sql, (rs, row) -> new Ticket(ticketNumber, rs.getInt("room_number"),
+				rs.getString("department"), rs.getString("request"), rs.getBoolean("resolved")), ticketNumber);
+		
+		return returnTicket;
 	}
 
 }
