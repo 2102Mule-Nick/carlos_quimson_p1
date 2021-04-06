@@ -14,10 +14,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.revature.controller")
+@ComponentScan("com.revature")
 public class WebConfig implements WebApplicationInitializer {
 
-	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
 
 		// Create the 'root' Spring Application Context
@@ -34,7 +33,7 @@ public class WebConfig implements WebApplicationInitializer {
 		//register and map the dispatcher servlet
 		ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(dispatcherContext));
 		dispatcher.setLoadOnStartup(1);
-		dispatcher.addMapping("/");
+		dispatcher.addMapping("/rest/*");
 
 	}
 

@@ -8,11 +8,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.dao.RoomDao;
 import com.revature.pojo.Room;
 
-@Controller
+@RestController
 public class FrontDeskController {
 
 	private RoomDao roomDao;
@@ -22,7 +23,7 @@ public class FrontDeskController {
 		this.roomDao = roomDao;
 	}
 	
-	@PutMapping("/room/")
+	@PutMapping("/room")
 	@ResponseBody
 	public void updateRoomOccupied(@RequestBody Room room) {
 		
@@ -38,5 +39,10 @@ public class FrontDeskController {
 		List<Room> roomList = roomDao.getAllRooms();
 		
 		return roomList;
+	}
+	
+	@GetMapping("/test")
+	public String example() {
+		return "working";
 	}
 }

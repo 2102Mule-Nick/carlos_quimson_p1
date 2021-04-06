@@ -193,7 +193,7 @@
 							<sourceRoot>${basedir}/src/main/java</sourceRoot>
 							<wsdlOptions>
 								<wsdlOption>
-									<wsdl>http://localhost:8080/P1_Maintenance/updateOos?wsdl</wsdl>
+									<wsdl>http://localhost:8080/P1_Maintenance/soap/updateOos?wsdl</wsdl>
 									<extraargs>
 										<extraarg>-client</extraarg>
 									</extraargs>
