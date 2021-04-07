@@ -12,24 +12,33 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.dao.RoomDao;
 import com.revature.pojo.Room;
+import com.revature.pojo.Ticket;
+import com.revature.service.CheckService;
 
 @RestController
 public class FrontDeskController {
 
 	private RoomDao roomDao;
+	
+	private CheckService service;
+
+	@Autowired
+	public void setService(CheckService service) {
+		this.service = service;
+	}
 
 	@Autowired
 	public void setRoomDao(RoomDao roomDao) {
 		this.roomDao = roomDao;
 	}
 	
-	@PutMapping("/room")
+	@PutMapping("/room/checkin")
 	@ResponseBody
-	public void updateRoomOccupied(@RequestBody Room room) {
+	public void checkIn(@RequestBody Room room) {
 		
-		roomDao.updateRoomOccupied(room);
+		service.checkIn(room);
 		
-		System.out.println("Front Desk Application: Updating Room Occupied");
+		System.out.println("Front Desk Application: Room Checkin");
 	}
 	
 	@GetMapping("/room")
@@ -41,8 +50,42 @@ public class FrontDeskController {
 		return roomList;
 	}
 	
+	@PutMapping("/room/checkout")
+	@ResponseBody
+	public void checkOut(@RequestBody Room room) {
+		service.checkOut(room);
+	}
+	
+	@PutMapping("/ticket/maintenance")
+	@ResponseBody
+	public void maintenanceTicket(@RequestBody Ticket ticket) {
+		service.sendMaintenance(ticket);
+	}
+	
+	@PutMapping("/ticket/housekeeping")
+	@ResponseBody
+	public void housekeepingTicket(@RequestBody Ticket ticket) {
+		service.sendHousekeeping(ticket);
+	}
+	
+	@PutMapping("/room/update")
+	@ResponseBody
+	public void updateRoomStatus(@RequestBody Room room) {
+		service.changeRoomStatus(room);
+	}
+	
+	@PutMapping("/room/oos")
+	@ResponseBody
+	public void updateRoomOos(@RequestBody Room room) {
+		System.out.println("Room Number: " + room.getRoomNumber() + " Out of Service: " + room.isRoomOutOfService());
+		
+		service.changeRoomOos(room);
+	}
+	
 	@GetMapping("/test")
 	public String example() {
 		return "working";
 	}
+	
+	
 }

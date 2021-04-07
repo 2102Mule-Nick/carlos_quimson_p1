@@ -14,12 +14,20 @@ import com.revature.config.AppConfig;
 import com.revature.dao.RoomDao;
 import com.revature.dao.RoomDaoJdbcTemplate;
 import com.revature.pojo.Room;
+import com.revature.service.CheckService;
 
 @Component
 public class JmsMessageListener implements MessageListener{
 
 	RoomDaoJdbcTemplate roomDao;
 	
+	CheckService service;
+	
+	@Autowired	
+	public void setService(CheckService service) {
+		this.service = service;
+	}
+
 	@Autowired
 	public void setRoomDao(RoomDaoJdbcTemplate roomDao) {
 		this.roomDao = roomDao;
@@ -34,7 +42,7 @@ public class JmsMessageListener implements MessageListener{
 			
 			try {
 				Room room = (Room)om.getObject();
-				roomDao.updateRoomStatus(room);
+				service.checkIn(room);
 				System.out.println("Message Received: Updating room");
 				
 				

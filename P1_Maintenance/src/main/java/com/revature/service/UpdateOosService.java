@@ -6,8 +6,8 @@ public interface UpdateOosService {
 
 	// maybe implement data validation here? 
 	
-	public void roomOutofService(Room room);
+	public void changeOutofService(Room room);
 	
-	public void roomInService(Room room);
+
 	
 }

@@ -24,7 +24,7 @@ public class JmsMessageListener implements MessageListener {
 		this.roomDao = roomDao;
 	}
 
-	@JmsListener(destination = AppConfig.ROOM_OCCUPIED_QUEUE)
+	@JmsListener(destination = AppConfig.ROOM_OOS_QUEUE)
 	public void onMessage(Message message) {
 		// TODO Auto-generated method stub
 		
@@ -34,7 +34,7 @@ public class JmsMessageListener implements MessageListener {
 
 			try {
 				Room room = (Room) om.getObject();
-				roomDao.updateRoomOutOfService(room);
+				roomDao.updateRoomOutOfService(room); // CALL SERVICE INSTEAD
 				System.out.println("Message Received: Updating room");
 
 			} catch (JMSException e) {

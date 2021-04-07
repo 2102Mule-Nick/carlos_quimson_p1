@@ -3,10 +3,12 @@ package com.revature.config;
 
 import javax.jms.ConnectionFactory;
 import javax.jms.Queue;
+import javax.jms.Topic;
 import javax.sql.DataSource;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQQueue;
+import org.apache.activemq.command.ActiveMQTopic;
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -25,7 +27,8 @@ public class AppConfig {
 	public static final String BROKER_URL = "tcp://localhost:61616";
 
 	// JMS Destinations
-	public static final String ROOM_OCCUPIED_QUEUE = "ROOM_OCCUPIED_QUEUE";
+	public static final String ROOM_OOS_QUEUE = "ROOM_OOS_QUEUE";
+	public static final String MAINTENANCE_TICKET_TOPIC = "MAINTENANCE_TICKET_TOPIC";
 	
 	//DataSource info
 	public static final String DATASOURCE_URL = "jdbc:postgresql://" + System.getenv("DB_URL") +
@@ -76,7 +79,12 @@ public class AppConfig {
 	
 	@Bean
 	public Queue destinationQueue() {
-		return new ActiveMQQueue(ROOM_OCCUPIED_QUEUE);
+		return new ActiveMQQueue(ROOM_OOS_QUEUE);
+	}
+	
+	@Bean
+	public Topic maintenanceTopic() {
+		return new ActiveMQTopic(MAINTENANCE_TICKET_TOPIC);
 	}
 
 	@Bean
@@ -85,4 +93,13 @@ public class AppConfig {
 		container.setConnectionFactory(connectionFactory);
 		return container;
 	}
+	
+	@Bean
+	public DefaultJmsListenerContainerFactory jmsListenerContainerTopic(ConnectionFactory connectionFactory) {
+		DefaultJmsListenerContainerFactory container = new DefaultJmsListenerContainerFactory();
+		container.setConnectionFactory(connectionFactory);
+		container.setPubSubDomain(true);
+		return container;
+	}
+	
 }

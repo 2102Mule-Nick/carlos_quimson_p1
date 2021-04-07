@@ -106,13 +106,13 @@ public static void main(String[] args) {
 		/***********************************************
 		 * Testing using SOAP via the updateOos
 		 */
-//		System.out.println("Attempting to Update OOS");
-//		Room room = new Room();
-//		room.setRoomNumber(101);
-//		room.setRoomOutOfService(false);
-//		
-//		roomDao.updateRoomOutOfService(room);
-//		System.out.println("Room out of Service updated");
+		System.out.println("Attempting to Update OOS");
+		Room room = new Room();
+		room.setRoomNumber(101);
+		room.setRoomOutOfService(true);
+		
+		roomDao.updateRoomOutOfService(room);
+		System.out.println("Room out of Service updated");
 		
 
 //**********************************************************************

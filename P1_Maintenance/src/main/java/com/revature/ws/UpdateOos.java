@@ -9,9 +9,7 @@ import com.revature.pojo.Room;
 public interface UpdateOos {
 	
 	@WebMethod
-	public void roomOutofService(Room room);
-	
-	@WebMethod
-	public void roomInService(Room room);
+	public void changeOutofService(Room room);
+
 
 }

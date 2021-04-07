@@ -17,15 +17,8 @@ public class UpdateOosImpl implements UpdateOos {
 	}
 
 	@Override
-	public void roomOutofService(Room room) {
-		updateOccupiedService.roomOutofService(room);
-
-	}
-
-	@Override
-	public void roomInService(Room room) {
-
-		updateOccupiedService.roomInService(room);
+	public void changeOutofService(Room room) {
+		updateOccupiedService.changeOutofService(room);
 
 	}
 

@@ -17,22 +17,22 @@ public class UpdateOosServiceImpl implements UpdateOosService {
 	}
 
 	@Override
-	public void roomOutofService(Room room) {
+	public void changeOutofService(Room room) {
 		Room updateRoom = new Room();
 		updateRoom.setRoomNumber(room.getRoomNumber());
-		updateRoom.setRoomOutOfService(true);
+		updateRoom.setRoomOutOfService(room.isRoomOutOfService());
 		
 		roomDao.updateRoomOutOfService(updateRoom); //only passes room number and a hard coded true value for outofservice
 	}
 
-	@Override
-	public void roomInService(Room room) {
-		Room updateRoom = new Room();
-		updateRoom.setRoomNumber(room.getRoomNumber());
-		updateRoom.setRoomOutOfService(false);
-		
-		roomDao.updateRoomOutOfService(updateRoom); //only passes room number and a hard coded false value for outofservice
-
-	}
+//	@Override
+//	public void roomInService(Room room) {
+//		Room updateRoom = new Room();
+//		updateRoom.setRoomNumber(room.getRoomNumber());
+//		updateRoom.setRoomOutOfService(false);
+//		
+//		roomDao.updateRoomOutOfService(updateRoom); //only passes room number and a hard coded false value for outofservice
+//
+//	}
 
 }

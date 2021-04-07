@@ -31,12 +31,12 @@ public class RoomDaoJdbcTemplate implements RoomDao { //Maintenance application
 	public void updateRoomOutOfService(Room room) {
 		String sql = "UPDATE rooms SET room_out_of_service = ? WHERE room_number = ?";
 		
-		Room updateRoom = this.getRoomByRoomNumber(room.getRoomNumber());
+		//Room updateRoom = this.getRoomByRoomNumber(room.getRoomNumber());
 		
 		jdbcTemplate.update( connection -> {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setBoolean(1, room.isRoomOutOfService());
-			ps.setInt(2, updateRoom.getRoomNumber());
+			ps.setInt(2, room.getRoomNumber());
 			return ps;
 		});
 	}
@@ -51,12 +51,16 @@ public class RoomDaoJdbcTemplate implements RoomDao { //Maintenance application
 	}
 	
 	@Override
-	public Room getRoomByRoomNumber(int roomNumber) {
+	public Room getRoomByRoomNumber(int roomNumber) throws IllegalArgumentException {
 		Room returnRoom;
 		
 		String sql = "SELECT * FROM rooms WHERE room_number = ?";
 		
 		List<Room> roomList = jdbcTemplate.query(sql, roomRowMapper, roomNumber);
+		
+		if (roomList.size() == 0) {
+			throw new IllegalArgumentException();
+		}
 		
 		returnRoom = roomList.get(0);
 		

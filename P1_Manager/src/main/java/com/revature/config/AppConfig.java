@@ -33,6 +33,7 @@ public class AppConfig {
 	//JMS Destinations
 	public static final String ROOM_STATUS_QUEUE = "ROOM_STATUS_QUEUE";
 	public static final String HOUSEKEEPING_TICKET_TOPIC = "HOUSEKEEPING_TICKET_TOPIC";
+	public static final String MAINTENANCE_TICKET_TOPIC = "MAINTENANCE_TICKET_TOPIC";
 	
 	//DataSource info
 	public static final String DATASOURCE_URL = "jdbc:postgresql://" + System.getenv("DB_URL") +

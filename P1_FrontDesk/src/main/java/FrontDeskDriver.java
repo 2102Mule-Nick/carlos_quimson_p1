@@ -33,7 +33,7 @@ public class FrontDeskDriver {
 		room.setRoomNumber(101);
 		room.setRoomOutOfService(false);
 		
-		roomDao.updateRoomOutOfService(room);
+//		roomDao.updateRoomOutOfService(room);
 		System.out.println("Room out of Service updated");
 	}
 	

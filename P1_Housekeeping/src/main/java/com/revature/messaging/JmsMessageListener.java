@@ -42,6 +42,7 @@ public class JmsMessageListener implements MessageListener{
 			ObjectMessage om = (ObjectMessage)message;
 			
 			try {
+				//add service here
 				Room room = (Room)om.getObject();
 				roomDao.updateRoomStatus(room);
 				System.out.println("Message Received: Updating room");
@@ -63,24 +64,5 @@ public class JmsMessageListener implements MessageListener{
 			
 		}
 	}
-	
-//	@JmsListener(destination = AppConfig.HOUSEKEEPING_TICKET_TOPIC)
-//	public void ticketMessage(Message message) {
-//		
-//		if (message instanceof ObjectMessage) {
-//			
-//			ObjectMessage om = (ObjectMessage)message;
-//			
-//			try {
-//				System.out.println("Housekeeping ticket topic: ");
-//				Ticket ticket = (Ticket)om.getObject();
-//				ticketDao.getTicketByNumber(ticket.getTicketNumber());
-//				System.out.println("New Ticket Received");
-//			} catch (JMSException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		
-//	}
 
 }
