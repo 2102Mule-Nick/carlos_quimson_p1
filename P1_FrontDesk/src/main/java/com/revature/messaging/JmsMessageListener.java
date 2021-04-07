@@ -33,7 +33,7 @@ public class JmsMessageListener implements MessageListener{
 		this.roomDao = roomDao;
 	}
 
-	@JmsListener(destination = AppConfig.ROOM_STATUS_QUEUE)
+	@JmsListener(destination = AppConfig.ROOM_STATUS_QUEUE) // why is this here? 
 	public void onMessage(Message message) {
 		
 		if (message instanceof ObjectMessage) {

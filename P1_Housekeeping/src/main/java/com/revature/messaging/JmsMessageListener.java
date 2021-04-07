@@ -42,7 +42,7 @@ public class JmsMessageListener implements MessageListener{
 				//add service here
 				Room room = (Room)om.getObject();
 				service.updateRoomStatus(room);
-				System.out.println("Message Received: Updating room " + room.getRoomNumber());
+				//System.out.println("Message Received: Updating room " + room.getRoomNumber());
 
 			} catch (JMSException e) {
 				e.printStackTrace();

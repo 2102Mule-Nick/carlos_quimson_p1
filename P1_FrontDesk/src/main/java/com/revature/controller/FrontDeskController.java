@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.dao.RoomDao;
+import com.revature.dao.TicketDao;
 import com.revature.pojo.Room;
 import com.revature.pojo.Ticket;
 import com.revature.service.CheckService;
@@ -20,7 +21,14 @@ public class FrontDeskController {
 
 	private RoomDao roomDao;
 	
+	private TicketDao ticketDao;
+	
 	private CheckService service;
+
+	@Autowired
+	public void setTicketDao(TicketDao ticketDao) {
+		this.ticketDao = ticketDao;
+	}
 
 	@Autowired
 	public void setService(CheckService service) {
@@ -54,6 +62,15 @@ public class FrontDeskController {
 	@ResponseBody
 	public void checkOut(@RequestBody Room room) {
 		service.checkOut(room);
+	}
+	
+	@GetMapping("/ticket")
+	@ResponseBody
+	public List<Ticket> getAllTicketss(){
+		
+		List<Ticket> ticketList = ticketDao.getAllTickets();
+		
+		return ticketList;
 	}
 	
 	@PutMapping("/ticket/maintenance")

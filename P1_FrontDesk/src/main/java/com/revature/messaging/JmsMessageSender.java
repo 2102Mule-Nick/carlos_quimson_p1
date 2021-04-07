@@ -17,12 +17,12 @@ public class JmsMessageSender {
 	
 	private Queue housekeepingQueue;
 	
-	private Queue housekeepingTicketTopic;
+	private Topic housekeepingTicketTopic;
 	
 	private Topic maintenanceTicketTopic;
 
 	@Autowired
-	public void setHousekeepingTicketTopic(Queue housekeepingTicketTopic) {
+	public void setHousekeepingTicketTopic(Topic housekeepingTicketTopic) {
 		this.housekeepingTicketTopic = housekeepingTicketTopic;
 	}
 

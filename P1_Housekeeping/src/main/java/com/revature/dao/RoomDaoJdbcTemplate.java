@@ -37,7 +37,7 @@ public class RoomDaoJdbcTemplate implements RoomDao {
 		List<Room> roomList = jdbcTemplate.query(sql, roomRowMapper, roomNumber);
 		
 		if (roomList.size() == 0) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Invalid room number");
 		}
 		returnRoom = roomList.get(0);
 		
@@ -45,7 +45,7 @@ public class RoomDaoJdbcTemplate implements RoomDao {
 	}
 
 	@Override //copy this to front desk and housekeeping application
-	public void updateRoomStatus(Room room) throws SQLException {
+	public void updateRoomStatus(Room room) throws IllegalArgumentException, SQLException {
 		String sql = "UPDATE rooms SET room_status = ? WHERE room_number = ?";
 		
 		Room updateRoom = this.getRoomByRoomNumber(room.getRoomNumber());

@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jms.annotation.EnableJms;
+import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.connection.SingleConnectionFactory;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.listener.DefaultMessageListenerContainer;
@@ -34,6 +35,8 @@ public class AppConfig {
 	public static final String ROOM_STATUS_QUEUE = "ROOM_STATUS_QUEUE";
 	public static final String HOUSEKEEPING_TICKET_TOPIC = "HOUSEKEEPING_TICKET_TOPIC";
 	public static final String MAINTENANCE_TICKET_TOPIC = "MAINTENANCE_TICKET_TOPIC";
+	public static final String ERROR_TOPIC = "ERROR_TOPIC";
+	public static final String RESOLVED_TOPIC = "RESOLVED_TOPIC";
 	
 	//DataSource info
 	public static final String DATASOURCE_URL = "jdbc:postgresql://" + System.getenv("DB_URL") +
@@ -90,6 +93,24 @@ public class AppConfig {
 	@Bean
 	public Topic housekeepingTopic() {
 		return new ActiveMQTopic(HOUSEKEEPING_TICKET_TOPIC);
+	}
+	
+	@Bean
+	public Topic errorTopic() {
+		return new ActiveMQTopic(ERROR_TOPIC);
+	}
+	
+	@Bean
+	public Topic resolvedTopic() {
+		return new ActiveMQTopic(RESOLVED_TOPIC);
+	}
+	
+	@Bean
+	public DefaultJmsListenerContainerFactory jmsListenerContainerTopic(ConnectionFactory connectionFactory) {
+		DefaultJmsListenerContainerFactory container = new DefaultJmsListenerContainerFactory();
+		container.setConnectionFactory(connectionFactory);
+		container.setPubSubDomain(true);
+		return container;
 	}
 	
 	/* removed because this will only be a sender not a listener

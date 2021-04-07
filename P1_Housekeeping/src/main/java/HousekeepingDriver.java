@@ -24,7 +24,7 @@ public class HousekeepingDriver {
 			//just listening for messages
 			command = scan.nextLine();
 		}
-		
+		System.exit(0);
 	}
 	
 }

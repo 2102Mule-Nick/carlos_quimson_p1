@@ -52,8 +52,8 @@ public class TicketDaoJDBCTemplate implements TicketDao {
 	}
 
 	@Override
-	public void updateTicket(Ticket ticket) {
-
+	public void updateTicket(Ticket ticket) throws IllegalArgumentException {
+		
 		
 		Ticket updateTicket = this.getTicketByNumber(ticket.getTicketNumber());
 		
@@ -80,12 +80,22 @@ public class TicketDaoJDBCTemplate implements TicketDao {
 	}
 
 	@Override
-	public Ticket getTicketByNumber(int ticketNumber) {
+	public Ticket getTicketByNumber(int ticketNumber) throws IllegalArgumentException {
+		
+		Ticket returnTicket;
 		
 		String sql = "SELECT * FROM tickets WHERE ticket_number = ?";
 		
-		Ticket returnTicket = jdbcTemplate.queryForObject(sql, (rs, row) -> new Ticket(ticketNumber, rs.getInt("room_number"),
-				rs.getString("department"), rs.getString("request"), rs.getBoolean("resolved")), ticketNumber);
+		List<Ticket> ticketList = jdbcTemplate.query(sql, ticketRowMapper, ticketNumber);
+		
+		if (ticketList.size() == 0) {
+			throw new IllegalArgumentException();
+		}
+		
+		returnTicket = ticketList.get(0);
+		
+//		Ticket returnTicket = jdbcTemplate.queryForObject(sql, (rs, ticketRowMapper) -> new Ticket(ticketNumber, rs.getInt("room_number"),
+//				rs.getString("department"), rs.getString("request"), rs.getBoolean("resolved")), ticketNumber);
 		
 		return returnTicket;
 	}

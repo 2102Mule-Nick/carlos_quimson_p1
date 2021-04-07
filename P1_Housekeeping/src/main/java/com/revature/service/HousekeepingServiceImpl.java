@@ -53,10 +53,10 @@ public class HousekeepingServiceImpl implements HousekeepingService {
 		
 		try {
 			roomDao.updateRoomStatus(room);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
+			System.out.println("Message Received: Updating room " + room.getRoomNumber());
+		} catch (SQLException | IllegalArgumentException e) {
+			messageSender.errorTopicSend("Housekeeping Application: \n Unable to update Room Status for room: " + room.getRoomNumber() + "\nStack Trace: \n" + e.toString());
+			//e.printStackTrace();
 		}
 
 	}

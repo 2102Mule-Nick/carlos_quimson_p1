@@ -19,10 +19,6 @@ public class TestDriver {
 
 public static void main(String[] args) {
 		
-		String command = null;
-		
-		Scanner scan = new Scanner(System.in);
-		
 		ApplicationContext appContext = new AnnotationConfigApplicationContext(AppConfig.class);
 		
 		JmsMessageSender messageSender = appContext.getBean("jmsMessageSender", JmsMessageSender.class);
@@ -143,5 +139,16 @@ public static void main(String[] args) {
 //		
 //		System.out.println("Auto-generated Employee ID: " + employee.getEmployeeId());
 		
+		String command = null;
+		
+		Scanner scan = new Scanner(System.in);
+		
+		System.out.println("Type exit to close Manager application");
+		
+		while(!"exit".equals(command)) {
+			//just listening for messages
+			command = scan.nextLine();
+		}
+		System.exit(0);
 	}
 }

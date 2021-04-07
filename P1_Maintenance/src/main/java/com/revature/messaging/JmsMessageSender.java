@@ -12,18 +12,18 @@ public class JmsMessageSender {
 
 	private JmsTemplate jmsTemplate;
 	
-	private Queue housekeepingQueue;
-	
 	private Topic errorTopic;
 	
+	private Topic resolvedTopic;
+	
 	@Autowired
-	public void setErrorTopic(Topic errorTopic) {
-		this.errorTopic = errorTopic;
+	public void setResolvedTopic(Topic resolvedTopic) {
+		this.resolvedTopic = resolvedTopic;
 	}
 
 	@Autowired
-	public void setManagerQueue(Queue housekeepingQueue) {
-		this.housekeepingQueue = housekeepingQueue;
+	public void setErrorTopic(Topic errorTopic) {
+		this.errorTopic = errorTopic;
 	}
 
 	@Autowired
@@ -31,13 +31,12 @@ public class JmsMessageSender {
 		this.jmsTemplate = jmsTemplate;
 	}
 	
-	public void housekeepingSend(String msg) {
-		jmsTemplate.send(housekeepingQueue, (s) -> s.createTextMessage(msg));
-	}
-	
 	public void errorTopicSend(String msg) {
 		jmsTemplate.send(errorTopic, (s) -> s.createTextMessage(msg));
 	}
 	
+	public void resolvedTopicSend(String msg) {
+		jmsTemplate.send(resolvedTopic, (s) -> s.createTextMessage(msg));
+	}
 	
 }

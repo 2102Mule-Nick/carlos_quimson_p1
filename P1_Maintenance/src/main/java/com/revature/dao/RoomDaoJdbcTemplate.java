@@ -28,10 +28,10 @@ public class RoomDaoJdbcTemplate implements RoomDao { //Maintenance application
 	}
 	
 	@Override // copy this to maintenance application
-	public void updateRoomOutOfService(Room room) {
+	public void updateRoomOutOfService(Room room) throws IllegalArgumentException {
 		String sql = "UPDATE rooms SET room_out_of_service = ? WHERE room_number = ?";
 		
-		//Room updateRoom = this.getRoomByRoomNumber(room.getRoomNumber());
+		this.getRoomByRoomNumber(room.getRoomNumber()); // to check if room is in DB
 		
 		jdbcTemplate.update( connection -> {
 			PreparedStatement ps = connection.prepareStatement(sql);

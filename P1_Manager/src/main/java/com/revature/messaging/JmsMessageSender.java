@@ -19,11 +19,11 @@ public class JmsMessageSender {
 	
 	private Queue housekeepingQueue;
 	
-	private Topic housekeepingTicketTopic;
+	private Topic housekeepingTopic;
 	
 	@Autowired
-	public void setHousekeepingTicketTopic(Topic housekeepingTicketTopic) {
-		this.housekeepingTicketTopic = housekeepingTicketTopic;
+	public void setHousekeepingTicketTopic(Topic housekeepingTopic) {
+		this.housekeepingTopic = housekeepingTopic;
 	}
 
 	@Autowired
@@ -41,8 +41,8 @@ public class JmsMessageSender {
 	}
 	
 	public void housekeepingTicketSend(Ticket ticket) {
-		System.out.println("Housekeeping Ticket Topic: " + housekeepingTicketTopic);
-		jmsTemplate.send(housekeepingTicketTopic, (s) -> s.createObjectMessage(ticket));
+		System.out.println("Housekeeping Ticket Topic: " + housekeepingTopic);
+		jmsTemplate.send(housekeepingTopic, (s) -> s.createObjectMessage(ticket));
 	}
 	
 	// for testing only

@@ -34,6 +34,7 @@ public class AppConfig {
 	//JMS Destinations
 	public static final String ROOM_STATUS_QUEUE = "ROOM_STATUS_QUEUE";
 	public static final String HOUSEKEEPING_TICKET_TOPIC = "HOUSEKEEPING_TICKET_TOPIC";
+	public static final String ERROR_TOPIC = "ERROR_TOPIC";
 	
 	//DataSource info
 	public static final String DATASOURCE_URL = "jdbc:postgresql://" + System.getenv("DB_URL") +
@@ -90,6 +91,11 @@ public class AppConfig {
 	@Bean
 	public Topic housekeepingTopic() {
 		return new ActiveMQTopic(HOUSEKEEPING_TICKET_TOPIC);
+	}
+	
+	@Bean
+	public Topic errorTopic() {
+		return new ActiveMQTopic(ERROR_TOPIC);
 	}
 	
 	@Bean

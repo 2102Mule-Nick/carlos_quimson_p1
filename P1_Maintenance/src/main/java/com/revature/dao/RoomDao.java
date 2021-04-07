@@ -6,7 +6,7 @@ import com.revature.pojo.Room;
 
 public interface RoomDao {
 	
-	public void updateRoomOutOfService(Room room);
+	public void updateRoomOutOfService(Room room) throws IllegalArgumentException;
 	
 	public List<Room> getAllRooms();
 	

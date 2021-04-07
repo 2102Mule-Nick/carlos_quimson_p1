@@ -18,6 +18,10 @@
 	<jaxws:endpoint id="updateOos"
 		implementor="com.revature.ws.UpdateOosImpl"
 		address="/updateOos"></jaxws:endpoint>
+		
+	<jaxws:endpoint id="updateTicket"
+		implementor="com.revature.ws.UpdateTicketImpl"
+		address="/updateTicket"></jaxws:endpoint>
 
 
 </beans>

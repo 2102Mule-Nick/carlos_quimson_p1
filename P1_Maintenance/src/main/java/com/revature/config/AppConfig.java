@@ -18,6 +18,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.connection.SingleConnectionFactory;
+import org.springframework.jms.core.JmsTemplate;
 
 @Configuration
 @ComponentScan("com.revature")
@@ -29,6 +30,8 @@ public class AppConfig {
 	// JMS Destinations
 	public static final String ROOM_OOS_QUEUE = "ROOM_OOS_QUEUE";
 	public static final String MAINTENANCE_TICKET_TOPIC = "MAINTENANCE_TICKET_TOPIC";
+	public static final String ERROR_TOPIC = "ERROR_TOPIC";
+	public static final String RESOLVED_TOPIC = "RESOLVED_TOPIC";
 	
 	//DataSource info
 	public static final String DATASOURCE_URL = "jdbc:postgresql://" + System.getenv("DB_URL") +
@@ -86,20 +89,38 @@ public class AppConfig {
 	public Topic maintenanceTopic() {
 		return new ActiveMQTopic(MAINTENANCE_TICKET_TOPIC);
 	}
-
+	
 	@Bean
+	public Topic errorTopic() {
+		return new ActiveMQTopic(ERROR_TOPIC);
+	}
+	
+	@Bean
+	public Topic resolvedTopic() {
+		return new ActiveMQTopic(RESOLVED_TOPIC);
+	}
+
+	@Bean // for Queues
 	public DefaultJmsListenerContainerFactory jmsListenerContainerFactory(ConnectionFactory connectionFactory) {
 		DefaultJmsListenerContainerFactory container = new DefaultJmsListenerContainerFactory();
 		container.setConnectionFactory(connectionFactory);
 		return container;
 	}
 	
-	@Bean
+	@Bean // for topics
 	public DefaultJmsListenerContainerFactory jmsListenerContainerTopic(ConnectionFactory connectionFactory) {
 		DefaultJmsListenerContainerFactory container = new DefaultJmsListenerContainerFactory();
 		container.setConnectionFactory(connectionFactory);
 		container.setPubSubDomain(true);
 		return container;
+	}
+	
+	@Bean
+	public JmsTemplate jmsTemplate(ConnectionFactory connectionFactory) {
+		JmsTemplate template = new JmsTemplate();
+		template.setConnectionFactory(connectionFactory);
+		
+		return template;
 	}
 	
 }
