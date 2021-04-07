@@ -66,8 +66,8 @@ public class AppConfig {
 		JdbcTemplate template = new JdbcTemplate();
 		template.setDataSource(dataSource);
 		return template;
-	}
-	
+	} 
+	//something
 	@Bean
 	public Logger log() {
 		return Logger.getRootLogger();
