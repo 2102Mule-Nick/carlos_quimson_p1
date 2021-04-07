@@ -24,10 +24,8 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _RoomInService_QNAME = new QName("http://ws.revature.com/", "roomInService");
-    private final static QName _RoomInServiceResponse_QNAME = new QName("http://ws.revature.com/", "roomInServiceResponse");
-    private final static QName _RoomOutofService_QNAME = new QName("http://ws.revature.com/", "roomOutofService");
-    private final static QName _RoomOutofServiceResponse_QNAME = new QName("http://ws.revature.com/", "roomOutofServiceResponse");
+    private final static QName _ChangeOutofService_QNAME = new QName("http://ws.revature.com/", "changeOutofService");
+    private final static QName _ChangeOutofServiceResponse_QNAME = new QName("http://ws.revature.com/", "changeOutofServiceResponse");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.revature.ws
@@ -37,35 +35,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link RoomInService }
+     * Create an instance of {@link ChangeOutofService }
      * 
      */
-    public RoomInService createRoomInService() {
-        return new RoomInService();
+    public ChangeOutofService createChangeOutofService() {
+        return new ChangeOutofService();
     }
 
     /**
-     * Create an instance of {@link RoomInServiceResponse }
+     * Create an instance of {@link ChangeOutofServiceResponse }
      * 
      */
-    public RoomInServiceResponse createRoomInServiceResponse() {
-        return new RoomInServiceResponse();
-    }
-
-    /**
-     * Create an instance of {@link RoomOutofService }
-     * 
-     */
-    public RoomOutofService createRoomOutofService() {
-        return new RoomOutofService();
-    }
-
-    /**
-     * Create an instance of {@link RoomOutofServiceResponse }
-     * 
-     */
-    public RoomOutofServiceResponse createRoomOutofServiceResponse() {
-        return new RoomOutofServiceResponse();
+    public ChangeOutofServiceResponse createChangeOutofServiceResponse() {
+        return new ChangeOutofServiceResponse();
     }
 
     /**
@@ -77,55 +59,29 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link RoomInService }{@code >}
+     * Create an instance of {@link JAXBElement }{@code <}{@link ChangeOutofService }{@code >}
      * 
      * @param value
      *     Java instance representing xml element's value.
      * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link RoomInService }{@code >}
+     *     the new instance of {@link JAXBElement }{@code <}{@link ChangeOutofService }{@code >}
      */
-    @XmlElementDecl(namespace = "http://ws.revature.com/", name = "roomInService")
-    public JAXBElement<RoomInService> createRoomInService(RoomInService value) {
-        return new JAXBElement<RoomInService>(_RoomInService_QNAME, RoomInService.class, null, value);
+    @XmlElementDecl(namespace = "http://ws.revature.com/", name = "changeOutofService")
+    public JAXBElement<ChangeOutofService> createChangeOutofService(ChangeOutofService value) {
+        return new JAXBElement<ChangeOutofService>(_ChangeOutofService_QNAME, ChangeOutofService.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link RoomInServiceResponse }{@code >}
+     * Create an instance of {@link JAXBElement }{@code <}{@link ChangeOutofServiceResponse }{@code >}
      * 
      * @param value
      *     Java instance representing xml element's value.
      * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link RoomInServiceResponse }{@code >}
+     *     the new instance of {@link JAXBElement }{@code <}{@link ChangeOutofServiceResponse }{@code >}
      */
-    @XmlElementDecl(namespace = "http://ws.revature.com/", name = "roomInServiceResponse")
-    public JAXBElement<RoomInServiceResponse> createRoomInServiceResponse(RoomInServiceResponse value) {
-        return new JAXBElement<RoomInServiceResponse>(_RoomInServiceResponse_QNAME, RoomInServiceResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link RoomOutofService }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link RoomOutofService }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://ws.revature.com/", name = "roomOutofService")
-    public JAXBElement<RoomOutofService> createRoomOutofService(RoomOutofService value) {
-        return new JAXBElement<RoomOutofService>(_RoomOutofService_QNAME, RoomOutofService.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link RoomOutofServiceResponse }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link RoomOutofServiceResponse }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://ws.revature.com/", name = "roomOutofServiceResponse")
-    public JAXBElement<RoomOutofServiceResponse> createRoomOutofServiceResponse(RoomOutofServiceResponse value) {
-        return new JAXBElement<RoomOutofServiceResponse>(_RoomOutofServiceResponse_QNAME, RoomOutofServiceResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://ws.revature.com/", name = "changeOutofServiceResponse")
+    public JAXBElement<ChangeOutofServiceResponse> createChangeOutofServiceResponse(ChangeOutofServiceResponse value) {
+        return new JAXBElement<ChangeOutofServiceResponse>(_ChangeOutofServiceResponse_QNAME, ChangeOutofServiceResponse.class, null, value);
     }
 
 }

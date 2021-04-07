@@ -14,11 +14,11 @@ public interface RoomDao {
 	
 	public void updateRoom(Room room);
 	
-	public void updateRoomStatus(Room room);
+//	public void updateRoomStatus(Room room);
 	
-	public void updateRoomOccupied(Room room);
+//	public void updateRoomOccupied(Room room);
 	
-	public void updateRoomOutOfService(Room room);
+//	public void updateRoomOutOfService(Room room);
 	
 	public List<Room> getAllRooms();
 

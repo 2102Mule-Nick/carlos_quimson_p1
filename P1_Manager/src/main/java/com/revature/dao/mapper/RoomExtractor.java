@@ -21,6 +21,7 @@ public class RoomExtractor implements ResultSetExtractor<Room> {
 		newRoom.setRoomStatus(rs.getString("room_status"));
 		newRoom.setRoomType(rs.getString("room_type"));
 		newRoom.setRoomOccupied(rs.getBoolean("room_occupied"));
+		newRoom.setRoomOutOfService(rs.getBoolean("room_out_of_service"));
 		
 		return newRoom;
 	}

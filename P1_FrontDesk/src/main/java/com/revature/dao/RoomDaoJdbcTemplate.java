@@ -1,6 +1,7 @@
 package com.revature.dao;
 
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,9 @@ public class RoomDaoJdbcTemplate implements RoomDao {
 	}
 	
 	@Override // copy this to front desk application
-	public void updateRoomOccupied(Room room) {
+	public void updateRoomOccupied(Room room) throws SQLException {
+		System.out.println("FD RoomDao updatRoom: Room Number: " + room.getRoomNumber());
+		
 		String sql = "UPDATE rooms SET room_occupied = ? WHERE room_number = ?";
 		
 		jdbcTemplate.update( connection -> {
@@ -62,12 +65,16 @@ public class RoomDaoJdbcTemplate implements RoomDao {
 
 
 	@Override
-	public Room getRoomByRoomNumber(int roomNumber) {
+	public Room getRoomByRoomNumber(int roomNumber) throws IllegalArgumentException {
 		Room returnRoom;
 		
 		String sql = "SELECT * FROM rooms WHERE room_number = ?";
 			
 		List<Room> roomList = jdbcTemplate.query(sql, roomRowMapper, roomNumber);
+		
+		if (roomList.size() == 0) {
+			throw new IllegalArgumentException();
+		}
 		
 		returnRoom = roomList.get(0);
 		

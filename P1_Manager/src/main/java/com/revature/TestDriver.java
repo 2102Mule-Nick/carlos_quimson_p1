@@ -32,21 +32,21 @@ public static void main(String[] args) {
 		TicketDaoJDBCTemplate ticketDao = appContext.getBean(TicketDaoJDBCTemplate.class);
 		
 		//Creating a ticket using JMS
-		System.out.println("Attempting to add ticket");
-		Ticket newTicket = new Ticket();
-		newTicket.setDepartment("Housekeeping");
-		newTicket.setRoomNumber(101);
-		newTicket.setRequest("Plunger");
-		
-		Ticket rTicket = new Ticket();
-		
-		rTicket = ticketDao.createTicket(newTicket);
-		
-		newTicket.setTicketNumber(rTicket.getTicketNumber());
-		
-		messageSender.housekeepingTicketSend(newTicket);
-		
-		System.out.println("New Ticket sent");
+//		System.out.println("Attempting to add ticket");
+//		Ticket newTicket = new Ticket();
+//		newTicket.setDepartment("Housekeeping");
+//		newTicket.setRoomNumber(101);
+//		newTicket.setRequest("Plunger");
+//		
+//		Ticket rTicket = new Ticket();
+//		
+//		rTicket = ticketDao.createTicket(newTicket);
+//		
+//		newTicket.setTicketNumber(rTicket.getTicketNumber());
+//		
+//		messageSender.housekeepingTicketSend(newTicket);
+//		
+//		System.out.println("New Ticket sent");
 		
 		/*
 		 * Attempting to create a ticket
@@ -81,11 +81,11 @@ public static void main(String[] args) {
 		
 		/**********
 		 * Testing JMS
-		 * 
-		messageSender.simpleSend("Just testing how to use JMS");
+		 */
+//		messageSender.simpleSend("Just testing how to use JMS");
 		
-		System.out.println("Message sent to Housekeeping");
-		*/
+//		System.out.println("Message sent to Housekeeping");
+		
 		
 		
 		
@@ -106,25 +106,25 @@ public static void main(String[] args) {
 		/***********************************************
 		 * Testing using SOAP via the updateOos
 		 */
-		System.out.println("Attempting to Update OOS");
-		Room room = new Room();
-		room.setRoomNumber(101);
-		room.setRoomOutOfService(true);
-		
-		roomDao.updateRoomOutOfService(room);
-		System.out.println("Room out of Service updated");
+//		System.out.println("Attempting to Update OOS");
+//		Room room = new Room();
+//		room.setRoomNumber(101);
+//		room.setRoomOutOfService(true);
+//		
+//		roomDao.updateRoomOutOfService(room);
+//		System.out.println("Room out of Service updated");
 		
 
 //**********************************************************************
 		// Testing setting a roomStatus via JMS
-//		Room room = new Room();
-//		
-//		room.setRoomNumber(101);
-//		room.setRoomStatus("Clean");
-//		
-//		
-//		System.out.println("Attempting to update Room Status in Housekeeping Application via JMS");
-//		messageSender.housekeepingSend(room);
+		Room room = new Room();
+		
+		room.setRoomNumber(301);
+		room.setRoomStatus("Clean");
+		
+		
+		System.out.println("Attempting to update Room Status in Housekeeping Application via JMS");
+		messageSender.housekeepingSend(room);
 		
 		// testing adding an employee
 		

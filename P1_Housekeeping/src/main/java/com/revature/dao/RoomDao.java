@@ -1,5 +1,6 @@
 package com.revature.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import com.revature.pojo.Room;
@@ -21,7 +22,7 @@ public interface RoomDao {
 	
 	public Room getRoomByRoomNumber(int roomNumber);
 	
-	public void updateRoomStatus(Room room);
+	public void updateRoomStatus(Room room) throws SQLException;
 	
 	public List<Room> getAllRooms();
 

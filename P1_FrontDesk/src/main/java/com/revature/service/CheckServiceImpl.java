@@ -1,5 +1,7 @@
 package com.revature.service;
 
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,7 +48,13 @@ public class CheckServiceImpl implements CheckService {
 		 */
 		room.setRoomOccupied(true);
 		room.setRoomStatus("Dirty");
-		roomDao.updateRoomOccupied(room);
+		try {
+			roomDao.updateRoomOccupied(room);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		}
 		
 		messageSender.roomStatusSend(room);
 		
@@ -57,8 +65,11 @@ public class CheckServiceImpl implements CheckService {
 		// Occupied Status to false
 		room.setRoomOccupied(false);
 		
-		roomDao.updateRoomOccupied(room);
-
+		try {
+			roomDao.updateRoomOccupied(room);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

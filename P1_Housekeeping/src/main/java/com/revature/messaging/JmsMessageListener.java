@@ -1,5 +1,7 @@
 package com.revature.messaging;
 
+import java.sql.SQLException;
+
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
@@ -16,23 +18,18 @@ import com.revature.dao.RoomDaoJdbcTemplate;
 import com.revature.dao.TicketDaoJDBCTemplate;
 import com.revature.pojo.Room;
 import com.revature.pojo.Ticket;
+import com.revature.service.HousekeepingService;
 
 @Component
 public class JmsMessageListener implements MessageListener{
 
-	RoomDaoJdbcTemplate roomDao;
+	HousekeepingService service;
 	
-	TicketDaoJDBCTemplate ticketDao;
-	
-	@Autowired	
-	public void setTicketDao(TicketDaoJDBCTemplate ticketDao) {
-		this.ticketDao = ticketDao;
+	@Autowired
+	public void setService(HousekeepingService service) {
+		this.service = service;
 	}
 
-	@Autowired
-	public void setRoomDao(RoomDaoJdbcTemplate roomDao) {
-		this.roomDao = roomDao;
-	}
 
 	@JmsListener(destination = AppConfig.ROOM_STATUS_QUEUE, containerFactory = "jmsListenerContainerQueue")
 	public void onMessage(Message message) {
@@ -44,10 +41,9 @@ public class JmsMessageListener implements MessageListener{
 			try {
 				//add service here
 				Room room = (Room)om.getObject();
-				roomDao.updateRoomStatus(room);
-				System.out.println("Message Received: Updating room");
-				
-				
+				service.updateRoomStatus(room);
+				System.out.println("Message Received: Updating room " + room.getRoomNumber());
+
 			} catch (JMSException e) {
 				e.printStackTrace();
 			}
