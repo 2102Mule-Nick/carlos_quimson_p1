@@ -111,7 +111,7 @@ public class FrontDeskController {
 		service.updateHousekeepingTicket(ticket);
 	}
 	
-	@PutMapping("/ticket/maintenance/update")
+	@PutMapping("/ticket/maintenance")
 	@ResponseBody
 	public void maintenanceTicketUpdate(@RequestBody Ticket ticket) {
 		service.updateMaintenanceTicket(ticket);
