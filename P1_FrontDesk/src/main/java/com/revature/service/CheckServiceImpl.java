@@ -132,6 +132,8 @@ public class CheckServiceImpl implements CheckService {
 	public void updateMaintenanceTicket(Ticket ticket) {
 		//Using maintenance app via SOAP
 		
+		//System.out.println("ticket number: " + ticket.getTicketNumber());
+		
 		UpdateTicketImplService updateTicket = new UpdateTicketImplService();
 		UpdateTicket update = updateTicket.getUpdateTicketImplPort();
 		
@@ -140,6 +142,7 @@ public class CheckServiceImpl implements CheckService {
 		newTicket.setRequest(ticket.getRequest());
 		newTicket.setResolved(ticket.isResolved());
 		newTicket.setRoomNumber(ticket.getRoomNumber());
+		newTicket.setTicketNumber(ticket.getTicketNumber());
 		
 		update.updateTicket(newTicket);
 		
