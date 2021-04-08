@@ -44,8 +44,15 @@ public class HousekeepingServiceImpl implements HousekeepingService {
 	@Override
 	public void updateTicket(Ticket ticket) {
 		
-		ticketDao.updateTicket(ticket);
-
+		try {
+			ticketDao.updateTicket(ticket);
+			messageSender.resolvedTopicSend("Housekeeping Application: Ticket #: " + ticket.getTicketNumber() + " has been updated");
+			//System.out.println("Updating ticket Number: " + ticket.getTicketNumber());
+		} catch (IllegalArgumentException e) {
+			messageSender.errorTopicSend("Housekeeping Application: \n Unable to update ticket #: " + ticket.getTicketNumber() + "\nStack Trace: \n" + e.toString());
+		} catch (Exception e) {
+			messageSender.errorTopicSend("Housekeeping Application: \n Unable to update ticket #: " + ticket.getTicketNumber() + "\nStack Trace: \n" + e.toString());
+		}
 	}
 
 	@Override
@@ -53,7 +60,7 @@ public class HousekeepingServiceImpl implements HousekeepingService {
 		
 		try {
 			roomDao.updateRoomStatus(room);
-			System.out.println("Message Received: Updating room " + room.getRoomNumber());
+			System.out.println("Sysout: Message Received: Updating room " + room.getRoomNumber());
 		} catch (SQLException | IllegalArgumentException e) {
 			messageSender.errorTopicSend("Housekeeping Application: \n Unable to update Room Status for room: " + room.getRoomNumber() + "\nStack Trace: \n" + e.toString());
 			//e.printStackTrace();

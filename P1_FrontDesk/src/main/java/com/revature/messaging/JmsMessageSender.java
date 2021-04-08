@@ -20,6 +20,13 @@ public class JmsMessageSender {
 	private Topic housekeepingTicketTopic;
 	
 	private Topic maintenanceTicketTopic;
+	
+	private Queue housekeepingTicketUpdateQueue;
+
+	@Autowired
+	public void setHousekeepingTicketUpdateQueue(Queue housekeepingTicketUpdateQueue) {
+		this.housekeepingTicketUpdateQueue = housekeepingTicketUpdateQueue;
+	}
 
 	@Autowired
 	public void setHousekeepingTicketTopic(Topic housekeepingTicketTopic) {
@@ -51,6 +58,10 @@ public class JmsMessageSender {
 	
 	public void maintenanceTicketSend(Ticket ticket) {
 		jmsTemplate.send(maintenanceTicketTopic, (s) -> s.createObjectMessage(ticket));
+	}
+	
+	public void housekeepingTicketUpdate(Ticket ticket) {
+		jmsTemplate.send(housekeepingTicketUpdateQueue, (s) -> s.createObjectMessage(ticket));
 	}
 	
 }

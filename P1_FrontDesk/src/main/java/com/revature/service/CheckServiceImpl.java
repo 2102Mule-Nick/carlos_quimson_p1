@@ -13,6 +13,8 @@ import com.revature.pojo.Room;
 import com.revature.pojo.Ticket;
 import com.revature.ws.UpdateOos;
 import com.revature.ws.UpdateOosImplService;
+import com.revature.ws.UpdateTicket;
+import com.revature.ws.UpdateTicketImplService;
 
 @Service
 public class CheckServiceImpl implements CheckService {
@@ -61,15 +63,19 @@ public class CheckServiceImpl implements CheckService {
 	}
 
 	@Override
+	@Transactional
 	public void checkOut(Room room) {
 		// Occupied Status to false
 		room.setRoomOccupied(false);
+		room.setRoomStatus("Dirty");
 		
 		try {
 			roomDao.updateRoomOccupied(room);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		messageSender.roomStatusSend(room);
 	}
 
 	@Override
@@ -100,7 +106,7 @@ public class CheckServiceImpl implements CheckService {
 	@Override
 	public void changeRoomOos(Room room) {
 		// USE SOAP Service for maintenance
-		System.out.println("Room Number: " + room.getRoomNumber() + " Out of Service: " + room.isRoomOutOfService());
+//		System.out.println("Room Number: " + room.getRoomNumber() + " Out of Service: " + room.isRoomOutOfService());
 		
 		UpdateOosImplService updateOos = new UpdateOosImplService();
 		UpdateOos update = updateOos.getUpdateOosImplPort();
@@ -110,10 +116,32 @@ public class CheckServiceImpl implements CheckService {
 		updateRoom.setRoomNumber(room.getRoomNumber());
 		updateRoom.setRoomOutOfService(room.isRoomOutOfService());
 		
-		System.out.println("Update Room Number: " + updateRoom.getRoomNumber() + " Out of Service: " + updateRoom.isRoomOutOfService());
+//		System.out.println("Update Room Number: " + updateRoom.getRoomNumber() + " Out of Service: " + updateRoom.isRoomOutOfService());
 		
-		//checking if room is to be set to Out of Service
 		update.changeOutofService(updateRoom);
+		
+	}
+
+	@Override
+	public void updateHousekeepingTicket(Ticket ticket) {
+
+		messageSender.housekeepingTicketUpdate(ticket);
+	}
+
+	@Override
+	public void updateMaintenanceTicket(Ticket ticket) {
+		//Using maintenance app via SOAP
+		
+		UpdateTicketImplService updateTicket = new UpdateTicketImplService();
+		UpdateTicket update = updateTicket.getUpdateTicketImplPort();
+		
+		com.revature.ws.Ticket newTicket = new com.revature.ws.Ticket();
+		newTicket.setDepartment(ticket.getDepartment());
+		newTicket.setRequest(ticket.getRequest());
+		newTicket.setResolved(ticket.isResolved());
+		newTicket.setRoomNumber(ticket.getRoomNumber());
+		
+		update.updateTicket(newTicket);
 		
 	}
 

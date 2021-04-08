@@ -35,6 +35,7 @@ public class AppConfig {
 	public static final String ROOM_STATUS_QUEUE = "ROOM_STATUS_QUEUE";
 	public static final String HOUSEKEEPING_TICKET_TOPIC = "HOUSEKEEPING_TICKET_TOPIC";
 	public static final String ERROR_TOPIC = "ERROR_TOPIC";
+	public static final String HK_TICKET_UPDATE_QUEUE = "HK_TICKET_UPDATE_QUEUE";
 	
 	//DataSource info
 	public static final String DATASOURCE_URL = "jdbc:postgresql://" + System.getenv("DB_URL") +
@@ -83,9 +84,14 @@ public class AppConfig {
 		return new SingleConnectionFactory(amqConnectionFactory);
 	}
 	
-	@Bean
-	public Queue destinationQueue() {
+	@Bean("roomStatusQueue")
+	public Queue housekeepingQueue() {
 		return new ActiveMQQueue(ROOM_STATUS_QUEUE);
+	}
+	
+	@Bean("ticketUpdateQueue")
+	public Queue ticketUpdateQueue() {
+		return new ActiveMQQueue(HK_TICKET_UPDATE_QUEUE);
 	}
 	
 	@Bean
@@ -93,7 +99,7 @@ public class AppConfig {
 		return new ActiveMQTopic(HOUSEKEEPING_TICKET_TOPIC);
 	}
 	
-	@Bean
+	@Bean("errorTopic")
 	public Topic errorTopic() {
 		return new ActiveMQTopic(ERROR_TOPIC);
 	}

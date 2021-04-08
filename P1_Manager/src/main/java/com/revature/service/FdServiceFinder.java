@@ -75,5 +75,17 @@ public class FdServiceFinder {
 		
 		restTemplate.put("http://localhost:8080/P1_FrontDesk/rest/room/oos", room, Room.class);
 	}
+	
+	public void housekeepingTicketUpdate(Ticket ticket) {
+		RestTemplate restTemplate = new RestTemplate();
+		
+		restTemplate.put("http://localhost:8080/P1_FrontDesk/rest/ticket/housekeeping", ticket, Ticket.class);
+	}
+	
+	public void maintenanceTicketUpdate(Ticket ticket) {
+		RestTemplate restTemplate = new RestTemplate();
+		
+		restTemplate.put("http://localhost:8080/P1_FrontDesk/rest/ticket/maintenance", ticket, Ticket.class);
+	}
 
 }

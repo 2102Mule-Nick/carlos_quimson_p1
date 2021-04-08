@@ -105,5 +105,15 @@ public class FrontDeskController {
 		return "working";
 	}
 	
+	@PutMapping("/ticket/housekeeping")
+	@ResponseBody
+	public void housekeepingTicketUpdate(@RequestBody Ticket ticket) {
+		service.updateHousekeepingTicket(ticket);
+	}
 	
+	@PutMapping("/ticket/maintenance/update")
+	@ResponseBody
+	public void maintenanceTicketUpdate(@RequestBody Ticket ticket) {
+		service.updateMaintenanceTicket(ticket);
+	}
 }

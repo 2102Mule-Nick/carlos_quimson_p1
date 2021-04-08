@@ -25,4 +25,8 @@ public interface ManagerService {
 	public void sendMaintenance(Ticket ticket);
 	
 	public void sendHousekeeping(Ticket ticket);
+	
+	public void updateHousekeepingTicket(Ticket ticket);
+	
+	public void updateMaintenanceTicket(Ticket ticket);
 }

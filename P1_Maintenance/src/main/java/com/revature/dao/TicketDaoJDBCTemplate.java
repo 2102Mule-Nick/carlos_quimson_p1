@@ -34,15 +34,15 @@ public class TicketDaoJDBCTemplate implements TicketDao {
 	public Ticket createTicket(Ticket ticket) {
 
 		String sql = "INSERT INTO tickets (room_number, department, request, resolved)"
-				+ "VALUES (?, ?, ?, false)";
+				+ "VALUES (?, 'Maintenance', ?, false)";
 		
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		
 		jdbcTemplate.update(connection -> {
 			PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			ps.setInt(1, ticket.getRoomNumber());
-			ps.setString(2, ticket.getDepartment());
-			ps.setString(3, ticket.getRequest());
+			//ps.setString(2, ticket.getDepartment());
+			ps.setString(2, ticket.getRequest());
 			return ps;
 		}, keyHolder);
 		

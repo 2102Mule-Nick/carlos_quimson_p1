@@ -17,4 +17,8 @@ public interface CheckService {
 	
 	public void sendHousekeeping(Ticket ticket);
 	
+	public void updateHousekeepingTicket(Ticket ticket);
+	
+	public void updateMaintenanceTicket(Ticket ticket);
+	
 }

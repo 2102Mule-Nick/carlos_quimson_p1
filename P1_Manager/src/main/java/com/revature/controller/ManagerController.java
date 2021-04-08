@@ -1,4 +1,4 @@
-package com.revature;
+package com.revature.controller;
 
 import java.util.List;
 
@@ -41,7 +41,7 @@ public class ManagerController {
 		this.managerService = managerService;
 	}
 	
-	@PostMapping("/room/add")
+	@PostMapping("/room")
 	@ResponseBody
 	public void addRoom(@RequestBody Room room) {
 		managerService.addRoom(room);
@@ -53,7 +53,7 @@ public class ManagerController {
 		managerService.removeRoom(room.getRoomNumber());
 	}
 	
-	@PutMapping("/room/update")
+	@PutMapping("/room")
 	@ResponseBody
 	public void updateRoom(@RequestBody Room room) {
 		managerService.updateRoom(room);
@@ -93,6 +93,18 @@ public class ManagerController {
 	@ResponseBody
 	public void sendHousekeeping(@RequestBody Ticket ticket) {
 		managerService.sendHousekeeping(ticket);
+	}
+	
+	@PutMapping("/ticket/maintenance")
+	@ResponseBody
+	public void maintenanceTicketUpdate(@RequestBody Ticket ticket) {
+		managerService.updateMaintenanceTicket(ticket);
+	}
+	
+	@PutMapping("/ticket/housekeeping")
+	@ResponseBody
+	public void housekeepingTicketUpdate(@RequestBody Ticket ticket) {
+		managerService.updateHousekeepingTicket(ticket);
 	}
 	
 	@GetMapping("/room")

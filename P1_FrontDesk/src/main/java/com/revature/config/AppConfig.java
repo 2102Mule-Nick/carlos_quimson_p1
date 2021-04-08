@@ -45,6 +45,7 @@ public class AppConfig {
 	public static final String MAINTENANCE_TICKET_TOPIC = "MAINTENANCE_TICKET_TOPIC";
 	public static final String ERROR_TOPIC = "ERROR_TOPIC";
 	public static final String RESOLVED_TOPIC = "RESOLVED_TOPIC";
+	public static final String HK_TICKET_UPDATE_QUEUE = "HK_TICKET_UPDATE_QUEUE";
 	
 	//public static final String DATASOURCE_DRIVERNAME = "org.postgresql.Driver";
 	public static final String DATASOURCE_DRIVERNAME = "org.postgresql.xa.PGXADataSource";
@@ -165,6 +166,11 @@ public class AppConfig {
 	@Bean
 	public Topic resolvedTopic() {
 		return new ActiveMQTopic(RESOLVED_TOPIC);
+	}
+	
+	@Bean
+	public Queue housekeepingTicketUpdateQueue() {
+		return new ActiveMQQueue(HK_TICKET_UPDATE_QUEUE);
 	}
 	
 //	@Bean

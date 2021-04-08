@@ -26,26 +26,23 @@ public class UpdateOosServiceImpl implements UpdateOosService {
 
 	@Override
 	public void changeOutofService(Room room) {
-//		Room updateRoom = new Room();
-//		updateRoom.setRoomNumber(room.getRoomNumber());
-//		updateRoom.setRoomOutOfService(room.isRoomOutOfService());
 		
-		try {
-			roomDao.updateRoomOutOfService(room); //only passes room number and a hard coded true value for outofservice
-		} catch (IllegalArgumentException e) {
-			// send message to Error topic
-			messageSender.errorTopicSend("Maintenance Application: \nUnable to update Room OUT OF SERVICE Status for room: " + room.getRoomNumber() + "\nStack Trace: \n" + e.toString());
+		Room updateRoom = roomDao.getRoomByRoomNumber(room.getRoomNumber());
+		
+		if (updateRoom.isRoomOccupied() == false) {
+		
+		
+			try {
+				roomDao.updateRoomOutOfService(room); 
+			} catch (IllegalArgumentException e) {
+				// send message to Error topic
+				messageSender.errorTopicSend("Maintenance Application: \nUnable to update Room OUT OF SERVICE Status for room: " + room.getRoomNumber() + "\nStack Trace: \n" + e.toString());
+			}
+		} else {
+			messageSender.errorTopicSend("Maintenance Application:\nUnable to put room " + updateRoom.getRoomNumber() + " because it is currently occupied");
 		}
 	}
 
-//	@Override
-//	public void roomInService(Room room) {
-//		Room updateRoom = new Room();
-//		updateRoom.setRoomNumber(room.getRoomNumber());
-//		updateRoom.setRoomOutOfService(false);
-//		
-//		roomDao.updateRoomOutOfService(updateRoom); //only passes room number and a hard coded false value for outofservice
-//
-//	}
+
 
 }

@@ -9,6 +9,7 @@ import javax.jms.ObjectMessage;
 import javax.jms.TextMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
@@ -32,6 +33,7 @@ public class JmsMessageListener implements MessageListener{
 
 
 	@JmsListener(destination = AppConfig.ROOM_STATUS_QUEUE, containerFactory = "jmsListenerContainerQueue")
+	@Qualifier("roomStatusQueue")
 	public void onMessage(Message message) {
 		
 		if (message instanceof ObjectMessage) {
@@ -58,6 +60,26 @@ public class JmsMessageListener implements MessageListener{
 				e.printStackTrace();
 			}
 			
+		}
+	}
+	
+	@JmsListener(destination = AppConfig.HK_TICKET_UPDATE_QUEUE, containerFactory = "jmsListenerContainerQueue")
+	@Qualifier("ticketUpdateQueue")
+	public void updateTicketMessage(Message message) {
+		
+		if (message instanceof ObjectMessage) {
+			
+			ObjectMessage om = (ObjectMessage)message;
+			
+			try {
+				
+				Ticket ticket = (Ticket)om.getObject();
+				service.updateTicket(ticket);
+				
+
+			} catch (JMSException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

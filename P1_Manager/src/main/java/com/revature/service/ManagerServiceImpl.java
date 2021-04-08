@@ -39,11 +39,18 @@ public class ManagerServiceImpl implements ManagerService {
 
 	@Override
 	public void removeRoom(int roomNumber) {
-		try {
-			roomDao.removeRoom(roomNumber);
-		} catch (IllegalArgumentException e) {
-			//maybe send message to error QUeue or add to log
-			e.printStackTrace();
+		Room updateRoom = roomDao.getRoomByRoomNumber(roomNumber);
+		
+		if (updateRoom.isRoomOccupied() == false) {
+		
+			try {
+				roomDao.removeRoom(roomNumber);
+			} catch (IllegalArgumentException e) {
+				//maybe send message to error QUeue or add to log
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println("Unable to delete room because it is occupied");
 		}
 
 	}
@@ -98,6 +105,20 @@ public class ManagerServiceImpl implements ManagerService {
 
 		serviceFinder.createHousekeepingTicket(ticket);
 
+	}
+
+	@Override
+	public void updateHousekeepingTicket(Ticket ticket) {
+		
+		serviceFinder.housekeepingTicketUpdate(ticket);
+		
+	}
+
+	@Override
+	public void updateMaintenanceTicket(Ticket ticket) {
+		
+		serviceFinder.maintenanceTicketUpdate(ticket);
+		
 	}
 
 }
