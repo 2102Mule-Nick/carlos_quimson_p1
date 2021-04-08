@@ -36,6 +36,7 @@ public class AppConfig {
 	public static final String HOUSEKEEPING_TICKET_TOPIC = "HOUSEKEEPING_TICKET_TOPIC";
 	public static final String ERROR_TOPIC = "ERROR_TOPIC";
 	public static final String HK_TICKET_UPDATE_QUEUE = "HK_TICKET_UPDATE_QUEUE";
+	public static final String RESOLVED_TOPIC = "RESOLVED_TOPIC";
 	
 	//DataSource info
 	public static final String DATASOURCE_URL = "jdbc:postgresql://" + System.getenv("DB_URL") +
@@ -102,6 +103,11 @@ public class AppConfig {
 	@Bean("errorTopic")
 	public Topic errorTopic() {
 		return new ActiveMQTopic(ERROR_TOPIC);
+	}
+	
+	@Bean("resolvedTopic")
+	public Topic resolvedTopic() {
+		return new ActiveMQTopic(RESOLVED_TOPIC);
 	}
 	
 	@Bean
