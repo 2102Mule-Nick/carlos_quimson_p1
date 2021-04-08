@@ -47,10 +47,10 @@ public class ManagerController {
 		managerService.addRoom(room);
 	}
 	
-	@DeleteMapping("/room/delete")
+	@DeleteMapping("/room")
 	@ResponseBody
-	public void removeRoom(@RequestBody int roomNumber) {
-		managerService.removeRoom(roomNumber);
+	public void removeRoom(@RequestBody Room room) {
+		managerService.removeRoom(room.getRoomNumber());
 	}
 	
 	@PutMapping("/room/update")
