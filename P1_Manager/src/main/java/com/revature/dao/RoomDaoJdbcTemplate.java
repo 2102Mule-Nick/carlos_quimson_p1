@@ -1,6 +1,7 @@
 package com.revature.dao;
 
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class RoomDaoJdbcTemplate implements RoomDao {
 	}
 
 	@Override
-	public void addRoom(Room room) {
+	public void addRoom(Room room) throws SQLException {
 		
 		String sql = "INSERT INTO rooms (room_number, room_type, room_status, room_occupied, room_out_of_service)"
 				+ "VALUES (?, ?, ?, ?, ?)";
@@ -56,20 +57,24 @@ public class RoomDaoJdbcTemplate implements RoomDao {
 	}
 
 	@Override
-	public void removeRoom(Room room) {
+	public void removeRoom(int roomNumber) throws IllegalArgumentException {
 		String sql = "DELETE FROM rooms WHERE room_number = ?";
+		
+		this.getRoomByRoomNumber(roomNumber); // checks if room is in db
 		
 		jdbcTemplate.update(connection -> {
 			PreparedStatement ps = connection.prepareStatement(sql);
-			ps.setInt(1, room.getRoomNumber());
+			ps.setInt(1, roomNumber);
 			return ps;
 		});
 
 	}
 
 	@Override
-	public void updateRoom(Room room) {
+	public void updateRoom(Room room) throws IllegalArgumentException {
 		String sql = "UPDATE rooms SET room_type = ? WHERE room_number = ?";
+		
+		this.getRoomByRoomNumber(room.getRoomNumber()); // checks if room is in db
 		
 		jdbcTemplate.update( connection -> {
 			PreparedStatement ps = connection.prepareStatement(sql);

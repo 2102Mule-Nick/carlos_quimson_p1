@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -73,13 +74,13 @@ public class FrontDeskController {
 		return ticketList;
 	}
 	
-	@PutMapping("/ticket/maintenance")
+	@PostMapping("/ticket/maintenance")
 	@ResponseBody
 	public void maintenanceTicket(@RequestBody Ticket ticket) {
 		service.sendMaintenance(ticket);
 	}
 	
-	@PutMapping("/ticket/housekeeping")
+	@PostMapping("/ticket/housekeeping")
 	@ResponseBody
 	public void housekeepingTicket(@RequestBody Ticket ticket) {
 		service.sendHousekeeping(ticket);

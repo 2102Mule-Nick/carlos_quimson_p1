@@ -115,7 +115,7 @@ public static void main(String[] args) {
 		// Testing setting a roomStatus via JMS
 		Room room = new Room();
 		
-		room.setRoomNumber(301);
+		room.setRoomNumber(201);
 		room.setRoomStatus("Clean");
 		
 		
