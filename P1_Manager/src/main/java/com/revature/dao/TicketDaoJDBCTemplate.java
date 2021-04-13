@@ -72,7 +72,7 @@ public class TicketDaoJDBCTemplate implements TicketDao {
 	@Override
 	public List<Ticket> getAllTickets() {
 		
-		String sql = "SELECT * FROM tickets";
+		String sql = "SELECT * FROM tickets ORDER BY ticket_number ASC";
 		
 		List<Ticket> allTickets = jdbcTemplate.query(sql, ticketRowMapper);
 		

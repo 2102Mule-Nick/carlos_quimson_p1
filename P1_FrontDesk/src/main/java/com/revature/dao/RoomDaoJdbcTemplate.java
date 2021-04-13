@@ -55,7 +55,7 @@ public class RoomDaoJdbcTemplate implements RoomDao {
 
 	@Override
 	public List<Room> getAllRooms() {
-		String sql = "SELECT * FROM rooms";
+		String sql = "SELECT * FROM rooms ORDER BY room_number asc";
 		
 		List<Room> allRooms = jdbcTemplate.query(sql, roomRowMapper);
 		
