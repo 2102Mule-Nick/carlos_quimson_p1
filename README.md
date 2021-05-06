@@ -26,3 +26,7 @@ The Hotel Departments Ticketing System manages guest request and maintenance tic
 #### To-do list:
 - Implement testing using JUnit and Mockito
 - Implement logging using Spring AOP
+
+## Getting Started
+#### Copy the repo by executing the command: 
+    `git clone `
