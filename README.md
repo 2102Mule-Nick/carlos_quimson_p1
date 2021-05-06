@@ -29,4 +29,13 @@ The Hotel Departments Ticketing System manages guest request and maintenance tic
 
 ## Getting Started
 #### Copy the repo by executing the command: 
-    `git clone `
+    `git clone https://github.com/2102Mule-Nick/carlos_quimson_p1.git`
+    
+#### Database Setup
+    For the database, execute the script that's included in the repo to create the database tables required
+    
+#### Running the application
+    1. There must be an ActiveMQ Server running for the JMS Service
+    2. The Front Desk, Manager, and Maintenance applications should be running on a server
+        - For my personal use, I've used the Tomcat Server included in Spring Tool Suites
+    3. Use Advanced Rest Client to access the endpoints
