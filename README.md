@@ -38,4 +38,41 @@ The Hotel Departments Ticketing System manages guest request and maintenance tic
     1. There must be an ActiveMQ Server running for the JMS Service
     2. The Front Desk, Manager, and Maintenance applications should be running on a server
         - For my personal use, I've used the Tomcat Server included in Spring Tool Suites
-    3. Use Advanced Rest Client to access the endpoints
+    3. Use Advanced Rest Client to access the endpoints. Sample inputs are available below
+
+```
+POST: http://localhost:8080/P1_Manager/rest/room/
+Room: 
+{
+  "roomNumber": 601,
+  "roomType": "NEDD",
+  "roomStatus": "Dirty",
+  "roomOccupied": false,
+  "roomOutOfService": false
+}
+```
+
+```
+POST: http://localhost:8080/P1_Manager/rest/ticket/housekeeping
+
+Ticket: {"roomNumber":601,"department":"Housekeeping","request":"Need toothpaste and extra towels","resolved":false}
+
+PUT: {
+  "ticketNumber":16,
+  "roomNumber": 601,
+  "department": "Housekeeping",
+  "request": "toothpaste and towels given to guests",
+  "resolved": true
+}
+```
+
+```
+POST: http://localhost:8080/P1_Manager/rest/ticket/maintenance
+{
+ "ticketNumber": ,
+  "roomNumber": 601,
+  "department": "Maintenance",
+  "request": "in-room fridge not working",
+  "resolved": false
+}
+```
